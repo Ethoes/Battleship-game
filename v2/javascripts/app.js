@@ -84,14 +84,14 @@ $(".rightField div").toArray().forEach(function (element) {
         });
 
 
-        for(var int = 1; int <= 49; int ++){
-                if($(".leftField div:nth-child(" + int +")").
-                // console.log($(".leftField div:nth-child(" + int +")"));
-                // if(document.leftField.getElementById(int).clicked != "clicked"){
-                //         return false;
-                // }
-                // alert("wiw");
-        }
+        // for(var int = 1; int <= 49; int ++){
+        //         if($(".leftField div:nth-child(" + int +")").
+        //         // console.log($(".leftField div:nth-child(" + int +")"));
+        //         // if(document.leftField.getElementById(int).clicked != "clicked"){
+        //         //         return false;
+        //         // }
+        //         // alert("wiw");
+        // }
 };
 
 // document.getElementById('form-button').onclick = function () {
