@@ -1,8 +1,75 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    width: 2000px;
+background: rgb(47, 50, 65);
+margin: auto;
 }
 
-a {
-  color: #00B7FF;
+img {
+     max-height: 600px;
+}
+
+header, main, footer {
+    min-width: 855px;
+}
+
+
+main {
+    width: 1800px;
+    margin: auto;
+}
+section.leftField{
+    width: 700px;
+    background: blue;
+    padding: 7px;
+    border: 2px solid;
+    color: black;
+    margin: auto;
+    float: left;
+
+}
+
+section.rightField{
+    width: 700px;
+    background: green;
+    padding: 7px;
+    border: 1px;
+    color: white;
+    margin: auto;
+    float:right;
+}
+
+div.row {
+    background: grey;
+    width: 700px;
+    hight: 100px;
+    float: top;
+    /* border: 2px solid;
+    border-color: red; */
+    
+}
+
+div div {
+    width: 92px;
+    height: 92px;
+    background: rgb(27, 26, 102);
+    border: 2px solid;
+    /* padding: 40px; */
+    
+    /* border-bottom: 10px; */
+    border-color: black;
+    float: left;
+    /* margin: auto; */
+}
+
+div div:hover {
+    background: cyan;
+}
+
+div div.clicked {
+    background: yellow;
+    pointer-events: none;
+}
+
+div div.clicked.hit {
+    background: red;
 }
