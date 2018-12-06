@@ -1,0 +1,54 @@
+body {
+    width: 1280px;
+    background: rgb(30, 29, 48);
+    margin: auto;
+}
+
+img {
+    
+    margin: auto;
+    padding: 30px;
+      
+      display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main {
+    padding: 40px;
+    margin-top: 40px;
+}
+
+button {
+   
+    padding: 40px;
+    border: solid 3px;
+    border-color: white;
+    border-radius: 10px;
+    width: 450px;
+    height: 75px;
+    margin: auto;
+    display: block;
+}
+
+div.stats {
+    padding: 70px;
+    margin-top: 40px;
+}
+
+div div{
+    padding: 40px;
+    border: solid 3px;
+    border-color: white;
+    border-radius: 10px;
+    width: 75px;
+    height: 75px;
+    margin: auto;
+    display: block;
+    float: left;
+    margin-left: 100px;
+    margin-right: 100px;
+    background: lightblue;
+        
+}
+
