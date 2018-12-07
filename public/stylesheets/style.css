@@ -40,7 +40,7 @@ section.rightField{
 }
 
 
-div div {
+div div{
     width: 92px;
     height: 92px;
     background: rgb(27, 26, 102);
@@ -66,6 +66,9 @@ div div.clicked.hit {
     background: red;
 }
 
+<<<<<<< HEAD
+
+=======
 div div.fill1 {
     background: none;
     border: none;
@@ -83,3 +86,4 @@ div div.fill1 {
 /* [draggable=true] {
     cursor: move;
 } */
+>>>>>>> bb45062a199bcee4f011df845719628102ef338b
