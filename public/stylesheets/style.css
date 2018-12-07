@@ -4,9 +4,10 @@ background: rgb(47, 50, 65);
 margin: auto;
 }
 
-img {
+/* img .logo {
      max-height: 600px;
-}
+     float: right;
+} */
 
 header, main, footer {
     min-width: 855px;
@@ -65,4 +66,24 @@ div div.clicked.hit {
     background: red;
 }
 
+<<<<<<< HEAD
 
+=======
+div div.fill1 {
+    background: none;
+    border: none;
+    background-image: url("twoShip.png");
+    
+    /* position: relative; */
+    height: 200;
+    width: 200;
+    /* top: 5px;
+    left: 5px; */
+    cursor: pointer;
+    -webkit-user-drag: auto;
+}
+
+/* [draggable=true] {
+    cursor: move;
+} */
+>>>>>>> bb45062a199bcee4f011df845719628102ef338b
