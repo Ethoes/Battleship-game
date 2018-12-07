@@ -63,6 +63,7 @@ $(".leftField div").toArray().forEach(function (element) {
         });
 
 
+        
 };
 
 $(document).ready(main);
