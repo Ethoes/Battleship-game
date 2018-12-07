@@ -66,9 +66,6 @@ div div.clicked.hit {
     background: red;
 }
 
-<<<<<<< HEAD
-
-=======
 div div.fill1 {
     background: none;
     border: none;
@@ -86,4 +83,3 @@ div div.fill1 {
 /* [draggable=true] {
     cursor: move;
 } */
->>>>>>> bb45062a199bcee4f011df845719628102ef338b
