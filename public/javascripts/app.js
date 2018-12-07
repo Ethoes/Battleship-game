@@ -11,7 +11,18 @@ var main = function () {
     "use strict";
 
     
-    
+        const ship1 = document.querySelector('.ship1');
+        const ship2 = document.querySelector('.ship2');
+        const ship3 = document.querySelector('.ship3');
+        const ship4 = document.querySelector('.ship4');
+        const ship5 = document.querySelector('.ship5');
+        const space1 = document.getElementById(Twoship1[0]);
+        const space2 = document.getElementById(Twoship2[0]);
+        const space3 = document.getElementById(Threeship1[0]);
+        const space4 = document.getElementById(Threeship2[0]);
+        const space5 = document.getElementById(FouShip[0]);
+
+        space1.appendChild(ship1);
 
 
     $(".rightField div").toArray().forEach(function (element) {

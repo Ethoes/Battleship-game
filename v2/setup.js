@@ -11,34 +11,61 @@ var main = function () {
     "use strict";
 
 
-    $(".Field div").toArray().forEach(function (element) {
-        // create a click handler for this element
-        $(element).on("click", function () {
+    // $(".Field div").toArray().forEach(function (element) {
+    //     // create a click handler for this element
+    //     $(element).on("click", function () {
            
-            var $element = $(element);
-            console.log($element);
-            $element.addClass("clicked");
-            var id = Number(element.id);
+    //         var $element = $(element);
+    //         console.log($element);
+    //         $element.addClass("clicked");
+    //         var id = Number(element.id);
 
-            for(var index = 0; index < ships.length; index++){
-                if(ships[index].includes(id)){
-                        console.log("that's a hit");
-                        $element.addClass("hit");
+    //         for(var index = 0; index < ships.length; index++){
+    //             if(ships[index].includes(id)){
+    //                     console.log("that's a hit");
+    //                     $element.addClass("hit");
                         
-                }
-        }
+    //             }
+    //     }
 
             
-
+    //     // function allowDrop(ev) {
+    //     //     ev.preventDefault();
+    //     //   }
+          
+    //     //   function drag(ev) {
+    //     //     ev.dataTransfer.setData("text", ev.target.id);
+    //     //   }
+          
+    //     //   function drop(ev) {
+    //     //     ev.preventDefault();
+    //     //     var data = ev.dataTransfer.getData("text");
+    //     //     ev.target.appendChild(document.getElementById(data));
+    //     //   }
             
 
       
-            return false;
-        });
-        });
+    //         return false;
+    //     });
+    //     });
 
 
 };
+
+function allowDrop(ev) {
+    ev.preventDefault();
+  }
+  
+  function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+  
+  function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+  }
+
 
 
 $(document).ready(main);
