@@ -4,7 +4,7 @@ body {
     margin: auto;
 }
 
-img {
+header img {
     
     margin: auto;
     padding: 30px;
@@ -52,3 +52,6 @@ div div{
         
 }
 
+/* img.test {
+    width: 400px;
+} */

@@ -1,0 +1,62 @@
+body {
+    width: 1280px;
+    background: rgb(30, 29, 48);
+    margin: auto;
+}
+
+header img {
+    
+    margin: auto;
+    padding: 30px;
+      
+      display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+section.Field{
+    width: 700px;
+    background: blue;
+    padding: 7px;
+    border: 2px solid;
+    color: black;
+    margin: auto;
+    float: left;
+
+}
+
+div.row {
+    background: grey;
+    width: 700px;
+    /* height: 90px; */
+    float: top;
+    /* border: 2px solid;
+    border-color: red; */
+    
+}
+
+div div {
+    width: 92px;
+    height: 92px;
+    background: rgb(27, 26, 102);
+    border: 2px solid;
+    /* padding: 40px; */
+    
+    /* border-bottom: 10px; */
+    border-color: black;
+    float: left;
+    /* margin: auto; */
+}
+
+div div:hover {
+    background: cyan;
+}
+
+div div.clicked {
+    background: yellow;
+    pointer-events: none;
+}
+
+div div.clicked.hit {
+    background: red;
+}
