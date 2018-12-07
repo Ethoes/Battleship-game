@@ -38,8 +38,10 @@ http.createServer(app).listen(3000);
 //     res.send(splash);
 // });
 
-app.get("/hello", function (req, res) {
-res.send("Hello World!");
+// var htmlsht = splash.html;
+
+app.get("/", function (req, res) {
+res.sendFile("splash.html", {root: "./"});
 });
 
 
