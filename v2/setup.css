@@ -144,3 +144,8 @@ img.ship.clicked {
 
     background: gold;
 }
+
+img.ship.disable {
+    background: green;
+    pointer-events: none;
+}

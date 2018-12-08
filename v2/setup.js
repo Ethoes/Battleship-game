@@ -10,13 +10,16 @@ var $element = 0;
 var toggle = 0;
 var turn = 0;
 
-
+var shipimg;
+var prevgrid;
 
 var main = function () {
     "use strict";
 
 
     $(".shipsetc img").toArray().forEach(function (element) {
+
+        
 
         $(element).on("click", function () {
 
@@ -25,7 +28,7 @@ var main = function () {
 
             toggle = 1;
 
-            
+            shipimg = $(element);
 
             $element = Number(element.id);
             console.log($element);
@@ -81,11 +84,29 @@ var main = function () {
 
             if(toggle == 1){
 
-                console.log("turn =" + turn);
+                
 
-                var idgrid = elementgrid.id;
+                 $(elementgrid).addClass("clicked");
 
+                var idgrid = Number(elementgrid.id);
+
+
+                if(prevgrid == null){
+                    prevgrid = idgrid;
+                }
+
+                
+
+                if((prevgrid == (idgrid + 1)) || (prevgrid == (idgrid - 1)) || (prevgrid == (idgrid + 7)) || (prevgrid == (idgrid - 7)) || (prevgrid == (idgrid))  ){
+                    
+
+
+                    // $(elementgrid).addClass("clicked");
+
+                  
                 if(turn > 0){
+
+                    
 
                     if($element == 1){
                      smolship.push(idgrid);
@@ -115,11 +136,15 @@ var main = function () {
             }
 
             if(turn == 0){
+                shipimg.addClass("disable");
                 toggle = 0;
                 $element = null;
+                prevgrid = null;
             }
             
-           
+           prevgrid = idgrid;
+
+        } // id statements
         }
         return false;
     })
