@@ -36,7 +36,7 @@ var main = function () {
                 shipimg = $(element);
 
                 $element = Number(element.id);
-               // console.log($element);
+             
                 $(element).addClass("clicked");
                 
                 if($element == 1){
@@ -87,15 +87,10 @@ var main = function () {
 
             if(toggle == 1){
                 turn--;
-                // var grid = $(elementgrid);
-                // var idgrid = Number(elementgrid.id);
-                
-                // grid.addClass("clicked");
-                // currentship.push(idgrid);
-
+               
                 prevgrid = idgrid;
 
-               // console.log(currentship)
+             
 
                 $(".Field div").toArray().forEach(function (elementgrid1) {
                     $(elementgrid1).addClass("disabled");
@@ -121,11 +116,7 @@ var main = function () {
 
             if(toggle == 2){
                 turn--;
-                // var grid = $(elementgrid);
-                // var idgrid = Number(elementgrid.id);
-                
-                // grid.addClass("clicked");
-                // currentship.push(idgrid);
+              
 
                 grid.addClass("disabled")
 
@@ -174,18 +165,15 @@ var main = function () {
                     })
 
                 }
-                //console.log(currentship)
+                
 
                 prevgrid = idgrid;
             }
 
-               
-                
-
-                // toggle++;
+             
                 return false;
 
-            // }
+            
 
          })
         return false;
