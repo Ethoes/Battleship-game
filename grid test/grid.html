@@ -9,14 +9,19 @@
 </head>
 <body>
     
-    <section class="container">
-        <div class="item">item-a</div>
-        <div class="item">item-b</div>
-        <div class="item">item-c</div>
-        <div class="item">item-d</div>
-        <div class="item">item-e</div>
-        <div class="item">item-f</div>
+    <div class="container">
+        <div id="1" class="item" ondrop="drop(event)" ondragover="allowDrop(event)">item-a</div>
+        <div id="2" class="item" ondrop="drop(event)" ondragover="allowDrop(event)">item-b</div>
+        <div id="3" class="item" ondrop="drop(event)" ondragover="allowDrop(event)">item-c</div>
+        <div id="4" class="item" ondrop="drop(event)" ondragover="allowDrop(event)">item-d</div>
+        <div id="5" class="item" ondrop="drop(event)" ondragover="allowDrop(event)">item-e</div>
+        <div id="6" class="item" ondrop="drop(event)" ondragover="allowDrop(event)">item-f</div>
+    </div>
 
+    <footer>
+        <img id="drag1" src="twoShip.png" draggable="true" ondragstart="drag(event)" width="180" height="69">
+    </footer>
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="java.js"></script>
 </body>
 </html>
