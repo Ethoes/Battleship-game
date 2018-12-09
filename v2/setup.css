@@ -52,14 +52,26 @@ div div:hover {
     background: cyan;
 }
 
-div div.clicked {
+div div.clicked.disabled {
     background: yellow;
     pointer-events: none;
 }
 
-div div.clicked:hover {
-    background: red;
+div div.available {
+    background: white;
 }
+
+div div.disabled {
+    pointer-events: none;
+    background: green;
+
+}
+
+
+
+/* div div.clicked:hover {
+    background: red;
+} */
 
 section.shipsetc {
     background: rgb(30, 169, 194);
