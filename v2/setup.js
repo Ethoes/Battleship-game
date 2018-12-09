@@ -66,6 +66,9 @@ var main = function () {
 
                 $(".Field div").toArray().forEach(function (elementgrid) {
                     $(elementgrid).removeClass("disabled");
+
+                    $('.clicked').addClass("disabled");
+                    
                 })
 
             };
@@ -88,6 +91,7 @@ var main = function () {
             currentship.push(idgrid);
 
             if(toggle == 1){
+                turn--;
                 // var grid = $(elementgrid);
                 // var idgrid = Number(elementgrid.id);
                 
@@ -119,6 +123,7 @@ var main = function () {
             
 
             if(toggle == 2){
+                turn--;
                 // var grid = $(elementgrid);
                 // var idgrid = Number(elementgrid.id);
                 
@@ -127,28 +132,76 @@ var main = function () {
 
                 grid.addClass("disabled")
 
-                if((idgrid != 7) && (idgrid != 14) && (idgrid != 21) && (idgrid != 28) && (idgrid != 35) && (idgrid != 42) && (idgrid != 49) && ((idgrid + 1) != prevgrid) )
-                  $("#" + (idgrid + 1) ).removeClass("disabled")
-               
-                if( clickedgrids.includes(idgrid + 7))
+                if((idgrid == (prevgrid + 1)) ){
+                    if((idgrid != 7) && (idgrid != 14) && (idgrid != 21) && (idgrid != 28) && (idgrid != 35) && (idgrid != 42) && (idgrid != 49)  )
+                        $("#" + (idgrid + 1) ).removeClass("disabled")
+
+                        $("#" + (prevgrid + 7) ).addClass("disabled")
+                        $("#" + (prevgrid - 7) ).addClass("disabled")
+
+                }
+
+                if((idgrid == (prevgrid - 1)) ){
+                    if((idgrid != 7) && (idgrid != 14) && (idgrid != 21) && (idgrid != 28) && (idgrid != 35) && (idgrid != 42) && (idgrid != 49)  )
+                        $("#" + (idgrid - 1) ).removeClass("disabled")
+
+                        $("#" + (prevgrid + 7) ).addClass("disabled")
+                        $("#" + (prevgrid - 7) ).addClass("disabled")
+
+                }
+
+                if((idgrid == (prevgrid + 7)) ){
+                    
                     $("#" + (idgrid + 7) ).removeClass("disabled")
-                
-                if((idgrid != 1) && (idgrid != 8) && (idgrid != 15) && (idgrid != 22) && (idgrid != 29) && (idgrid != 36) && (idgrid != 43) && ((idgrid - 1) != prevgrid) )
-                    $("#" + (idgrid - 1) ).removeClass("disabled")
-                
-                if(((idgrid - 7) != prevgrid))
+
+                    $("#" + (prevgrid + 1) ).addClass("disabled")
+                    $("#" + (prevgrid - 1) ).addClass("disabled")
+
+                }
+
+                if((idgrid == (prevgrid - 7)) ){
+                    
                     $("#" + (idgrid - 7) ).removeClass("disabled")
-                
+
+                    $("#" + (prevgrid + 1) ).addClass("disabled")
+                    $("#" + (prevgrid - 1) ).addClass("disabled")
+
+                }
+
+                if(turn == 0){
+                    toggle = 0;
+                    shipimg.addClass("disable");
+
+                    $(".Field div").toArray().forEach(function (elementgrid1) {
+                        $(elementgrid1).addClass("disabled");
+                    })
+
+                }
                 console.log(currentship)
 
                 prevgrid = idgrid;
+            }
+
+                // if((idgrid != 7) && (idgrid != 14) && (idgrid != 21) && (idgrid != 28) && (idgrid != 35) && (idgrid != 42) && (idgrid != 49)  )
+                //   $("#" + (idgrid + 1) ).removeClass("disabled")
+               
+                // if( clickedgrids.includes(idgrid + 7))
+                //     $("#" + (idgrid + 7) ).removeClass("disabled")
+                
+                // if((idgrid != 1) && (idgrid != 8) && (idgrid != 15) && (idgrid != 22) && (idgrid != 29) && (idgrid != 36) && (idgrid != 43) && (clickedgrids.includes(idgrid + 7)) )
+                //     $("#" + (idgrid - 1) ).removeClass("disabled")
+                
+                // if(clickedgrids.includes(idgrid + 7))
+                //     $("#" + (idgrid - 7) ).removeClass("disabled")
+                
+                
 
                 // toggle++;
                 return false;
 
-            }
+            // }
 
-        })
+         })
         return false;
     })
 }           
