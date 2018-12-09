@@ -2,7 +2,7 @@ var Twoship1 = [1, 2];
 var Twoship2 = [3, 4];
 var Threeship1 = [16, 23, 30];
 var Threeship2 = [8, 9, 10];
-var FourShip = [25, 32, 39, 46];
+var FourShip = [46, 47, 48, 49];
 
 var ships = [Twoship1, Twoship2, Threeship1, Threeship2, FourShip];
 
@@ -10,6 +10,7 @@ var ships = [Twoship1, Twoship2, Threeship1, Threeship2, FourShip];
 
 var main = function () {
     "use strict";
+
 
         
 
