@@ -16,8 +16,8 @@ var shipimg;
 var prevgrid = null;
 
 var clickedgrids = [];
-var isshipvertical = false;
-var howmanyturns = 0;
+// var isshipvertical = false;
+// var howmanyturns = 0;
 
 var main = function () {
     "use strict";
@@ -36,7 +36,7 @@ var main = function () {
                 shipimg = $(element);
 
                 $element = Number(element.id);
-                console.log($element);
+               // console.log($element);
                 $(element).addClass("clicked");
                 
                 if($element == 1){
@@ -76,12 +76,6 @@ var main = function () {
      });
     
 
-
-
-
-
-        // toggle = 0;
-
     $(".Field div").toArray().forEach(function (elementgrid) {
         $(elementgrid).on("click", function () {
 
@@ -89,6 +83,7 @@ var main = function () {
             var idgrid = Number(elementgrid.id);
             grid.addClass("clicked");
             currentship.push(idgrid);
+            clickedgrids.push(idgrid);
 
             if(toggle == 1){
                 turn--;
@@ -100,22 +95,24 @@ var main = function () {
 
                 prevgrid = idgrid;
 
-                console.log(currentship)
+               // console.log(currentship)
 
                 $(".Field div").toArray().forEach(function (elementgrid1) {
                     $(elementgrid1).addClass("disabled");
                 })
 
 
-                if((idgrid != 7) && (idgrid != 14) && (idgrid != 21) && (idgrid != 28) && (idgrid != 35) && (idgrid != 42) && (idgrid != 49) )
+                if((idgrid != 7) && (idgrid != 14) && (idgrid != 21) && (idgrid != 28) && (idgrid != 35) && (idgrid != 42) && (idgrid != 49) && (!clickedgrids.includes(idgrid + 1)) )
                   $("#" + (idgrid + 1) ).removeClass("disabled")
                
-                $("#" + (idgrid + 7) ).removeClass("disabled")
+                if(!clickedgrids.includes(idgrid + 7))
+                    $("#" + (idgrid + 7) ).removeClass("disabled")
                 
-                if((idgrid != 1) && (idgrid != 8) && (idgrid != 15) && (idgrid != 22) && (idgrid != 29) && (idgrid != 36) && (idgrid != 43) )
+                if((idgrid != 1) && (idgrid != 8) && (idgrid != 15) && (idgrid != 22) && (idgrid != 29) && (idgrid != 36) && (idgrid != 43) && (!clickedgrids.includes(idgrid - 1)))
                     $("#" + (idgrid - 1) ).removeClass("disabled")
                 
-                $("#" + (idgrid - 7) ).removeClass("disabled")
+                if(!clickedgrids.includes(idgrid - 7))
+                    $("#" + (idgrid - 7) ).removeClass("disabled")
                 
                 toggle++;
                 return false;
@@ -133,7 +130,7 @@ var main = function () {
                 grid.addClass("disabled")
 
                 if((idgrid == (prevgrid + 1)) ){
-                    if((idgrid != 7) && (idgrid != 14) && (idgrid != 21) && (idgrid != 28) && (idgrid != 35) && (idgrid != 42) && (idgrid != 49)  )
+                    if((idgrid != 7) && (idgrid != 14) && (idgrid != 21) && (idgrid != 28) && (idgrid != 35) && (idgrid != 42) && (idgrid != 49) && (!clickedgrids.includes(idgrid + 1)) )
                         $("#" + (idgrid + 1) ).removeClass("disabled")
 
                         $("#" + (prevgrid + 7) ).addClass("disabled")
@@ -142,7 +139,7 @@ var main = function () {
                 }
 
                 if((idgrid == (prevgrid - 1)) ){
-                    if((idgrid != 7) && (idgrid != 14) && (idgrid != 21) && (idgrid != 28) && (idgrid != 35) && (idgrid != 42) && (idgrid != 49)  )
+                    if((idgrid != 7) && (idgrid != 14) && (idgrid != 21) && (idgrid != 28) && (idgrid != 35) && (idgrid != 42) && (idgrid != 49) && (!clickedgrids.includes(idgrid - 1)) )
                         $("#" + (idgrid - 1) ).removeClass("disabled")
 
                         $("#" + (prevgrid + 7) ).addClass("disabled")
@@ -151,8 +148,8 @@ var main = function () {
                 }
 
                 if((idgrid == (prevgrid + 7)) ){
-                    
-                    $("#" + (idgrid + 7) ).removeClass("disabled")
+                    if(!clickedgrids.includes(idgrid + 7))
+                        $("#" + (idgrid + 7) ).removeClass("disabled")
 
                     $("#" + (prevgrid + 1) ).addClass("disabled")
                     $("#" + (prevgrid - 1) ).addClass("disabled")
@@ -160,8 +157,8 @@ var main = function () {
                 }
 
                 if((idgrid == (prevgrid - 7)) ){
-                    
-                    $("#" + (idgrid - 7) ).removeClass("disabled")
+                    if(!clickedgrids.includes(idgrid -7))
+                        $("#" + (idgrid - 7) ).removeClass("disabled")
 
                     $("#" + (prevgrid + 1) ).addClass("disabled")
                     $("#" + (prevgrid - 1) ).addClass("disabled")
@@ -177,23 +174,12 @@ var main = function () {
                     })
 
                 }
-                console.log(currentship)
+                //console.log(currentship)
 
                 prevgrid = idgrid;
             }
 
-                // if((idgrid != 7) && (idgrid != 14) && (idgrid != 21) && (idgrid != 28) && (idgrid != 35) && (idgrid != 42) && (idgrid != 49)  )
-                //   $("#" + (idgrid + 1) ).removeClass("disabled")
                
-                // if( clickedgrids.includes(idgrid + 7))
-                //     $("#" + (idgrid + 7) ).removeClass("disabled")
-                
-                // if((idgrid != 1) && (idgrid != 8) && (idgrid != 15) && (idgrid != 22) && (idgrid != 29) && (idgrid != 36) && (idgrid != 43) && (clickedgrids.includes(idgrid + 7)) )
-                //     $("#" + (idgrid - 1) ).removeClass("disabled")
-                
-                // if(clickedgrids.includes(idgrid + 7))
-                //     $("#" + (idgrid - 7) ).removeClass("disabled")
-                
                 
 
                 // toggle++;
@@ -206,187 +192,7 @@ var main = function () {
     })
 }           
 
-    //            if( (digrid.includes(idgrid + 1)) || (digrid.includes(idgrid - 1)) || (digrid.includes(idgrid + 7)) || (digrid.includes(idgrid - 7)) || prevgrid == null)
-    //                 digrid.push(idgrid);
-
-    //             // console.log("gridnmber " + digrid);
-
-
-    //             if(prevgrid == null || (prevgrid == (-69))){
-    //                 prevgrid = idgrid;
-    //             }
-
-    //         //     console.log("prevgrid before assert " + prevgrid);
-
-    //         // console.log(" vertical  " + isshipvertical);
-    //         //     console.log( "plus 1 " + ( (isshipvertical == false ) && ( (digrid.includes(prevgrid + 1)) || (digrid.includes(prevgrid - 1)) ) ) );
-    //         //     console.log(" not at the edge  " +   ( (idgrid != 7) && (idgrid != 14) && (idgrid != 21) && (idgrid != 28) && (idgrid != 35) && (idgrid != 42) && (idgrid != 49) &&
-    //         //     (idgrid != 1) && (idgrid != 8) && (idgrid != 15) && (idgrid != 22) && (idgrid != 29) && (idgrid != 36) && (idgrid != 43)));
-
-    //         //     console.log("plus 7 " +  ( ((isshipvertical == true) || (howmanyturns < 2) )&&    ( (digrid.includes( (prevgrid + 7)  )) || (digrid.includes( (prevgrid - 7) ) ) )));
-    //         //     console.log("digrid contains prevgrid " + ( idgrid == prevgrid ) );
-
-    //             if(( ((isshipvertical == false ) || (howmanyturns < 2)) && ( (digrid.includes(prevgrid + 1)) || (digrid.includes(prevgrid - 1)) || ( idgrid == prevgrid )) )  ){
-                    
-
-
-    //                 $(elementgrid).addClass("clicked");
-
-                  
-    //             if(turn > 0){
-
-        
-    //                 if($element == 1){
-    //                  smolship.push(idgrid);
-    //                  turn--;
-    //                 }
-
-    //                 if($element == 2){
-    //                     smolship2.push(idgrid);
-    //                     turn--;
-    //                    }
-
-    //                    if($element == 3){
-    //                     mediumship.push(idgrid);
-    //                     turn--;
-    //                     howmanyturns ++;
-
-    //                     if( (digrid.includes(prevgrid + 7)) || (digrid.includes(prevgrid - 7))){
-    //                         isshipvertical = true;
-    //                         // console.log("sup m " + isshipvertical);   
-    //                     }
-    //                    }
-
-    //                    if($element == 4){
-    //                     mediumship2.push(idgrid);
-    //                     turn--;
-    //                     howmanyturns++;
-    //                     if((digrid.includes(prevgrid + 7)) || (digrid.includes(prevgrid - 7))){
-    //                         isshipvertical = true;
-    //                     }
-    //                    }
-
-    //                    if($element == 5){
-    //                     largeship.push(idgrid);
-    //                     turn--;
-    //                     howmanyturns++;
-    //                     if((digrid.includes(prevgrid + 7)) || (digrid.includes(prevgrid - 7))){
-    //                         isshipvertical = true;
-    //                     }
-    //                    }
-
-    //         }
-
-    //          prevgrid = idgrid;
-
-    //         if(turn == 0){
-    //             shipimg.addClass("disable");
-                
-    //             toggle = 0;
-    //             $element = null;
-    //             prevgrid = null;
-
-                
-    //             isshipvertical = false;
-    //             digrid = [];
-    //             howmanyturns = 0;
-    //         }
-            
-        
-    //         // console.log("test array grid " + digrid + " index " + digrid.includes(prevgrid) + prevgrid ) //(prevgrid == (digrid + 1)) || (prevgrid == (digrid - 1)) || (prevgrid == (digrid + 7)) || (prevgrid == (digrid - 7)) || (prevgrid == (digrid)));
-
-    //     // } 
-
-
-
-
-    //     if(( ((isshipvertical == true) || (howmanyturns < 2)) &&    ( (digrid.includes( (prevgrid + 7)  )) || (digrid.includes( (prevgrid - 7) ) ) ))  ){
-                    
-
-
-    //         $(elementgrid).addClass("clicked");
-
-          
-    //     if(turn > 0){
-
-
-    //         if($element == 1){
-    //          smolship.push(idgrid);
-    //          turn--;
-    //         }
-
-    //         if($element == 2){
-    //             smolship2.push(idgrid);
-    //             turn--;
-    //            }
-
-    //            if($element == 3){
-    //             mediumship.push(idgrid);
-    //             turn--;
-    //             howmanyturns ++;
-
-    //             if( (digrid.includes(prevgrid + 7)) || (digrid.includes(prevgrid - 7))){
-    //                 isshipvertical = true;
-    //                 // console.log("sup m " + isshipvertical);   
-    //             }
-    //            }
-
-    //            if($element == 4){
-    //             mediumship2.push(idgrid);
-    //             turn--;
-    //             howmanyturns++;
-    //             if((digrid.includes(prevgrid + 7)) || (digrid.includes(prevgrid - 7))){
-    //                 isshipvertical = true;
-    //             }
-    //            }
-
-    //            if($element == 5){
-    //             largeship.push(idgrid);
-    //             turn--;
-    //             howmanyturns++;
-    //             if((digrid.includes(prevgrid + 7)) || (digrid.includes(prevgrid - 7))){
-    //                 isshipvertical = true;
-    //             }
-    //            }
-
-    // }
-
-    //  prevgrid = idgrid;
-
-    // if(turn == 0){
-    //     shipimg.addClass("disable");
-    //     toggle = 0;
-    //     $element = null;
-    //     prevgrid = null;
-
-        
-    //     isshipvertical = false;
-    //     digrid = [];
-    //     howmanyturns = 0;
-    // }
-    
-
-   // console.log("test array grid " + digrid + " index " + digrid.includes(prevgrid) + prevgrid ) //(prevgrid == (digrid + 1)) || (prevgrid == (digrid - 1)) || (prevgrid == (digrid + 7)) || (prevgrid == (digrid - 7)) || (prevgrid == (digrid)));
-
-// } 
-
-
-
-
-
-    //     }
-    //     return false;
-    // })
-
-
-    
-    
-// })
-
-            
-
-        
-// };
+  
 
 
 $(document).ready(main);
