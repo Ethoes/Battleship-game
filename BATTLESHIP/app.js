@@ -34,13 +34,15 @@ wss.on("connection", function connection(ws) {
  
     let gameObj = websockets[con.id];
     let isPlayerA = (gameObj.playerA == con) ? true : false;
+    
     if (isPlayerA) {
             
             /*
              * player A cannot do a lot, just send the target word;
              * if player B is already available, send message to B
              */
-      if (oMsg.type == messages.T_TARGET_WORD) {/////////////////////change message
+      if (oMsg.type == messages.O_Set_Field) {
+        
         gameObj.setplayerAfield(oMsg.data);
         if(gameObj.hasTwoConnectedPlayers()){
           gameObj.playerB.send(message); 
@@ -59,7 +61,7 @@ wss.on("connection", function connection(ws) {
       }
     }
       else {
-        if (oMsg.type == messages.T_TARGET_WORD) { ////////////////////message
+        if (oMsg.type == messages.O_Set_Field) { 
           gameObj.setplayerBfield(oMsg.data);
           if(gameObj.hasTwoConnectedPlayers()){
             gameObj.playerA.send(message); 

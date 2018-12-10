@@ -26,7 +26,9 @@ var game = function (gameID) {
       return this.playerAField;
   }
 
-
+  game.prototype.getplayerBField = function(){
+    return this.playerBField;
+}
   game.prototype.playerAgotAHit = function(gridspot){
     if( this.playerBField.includes(gridspot) ){
         if(!this.playerAhits.includes(gridspot))
