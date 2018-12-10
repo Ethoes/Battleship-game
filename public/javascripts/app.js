@@ -215,9 +215,9 @@ var main = function () {
                 space53.appendChild(ship53);
                 space54.appendChild(ship54); 
         }
-        
+        var F = 1;
         var i = 1;
-
+        var E = 0;
     $(".rightField div").toArray().forEach(function (element) {
         // create a click handler for this element
         $(element).on("click", function () {
@@ -227,6 +227,7 @@ var main = function () {
             $element.addClass("clicked");
             var id = Number(element.id); 
             const hit = document.querySelector('.hit'+i);
+            const miss = document.querySelector('.miss' + F);
 
             for(var index = 0; index < ships.length; index++){
                 if(ships[index].includes(id)){
@@ -235,9 +236,18 @@ var main = function () {
                         hit.className += ' visible';
                         $element.append(hit);
                         i++
+                        E = 1;
                 }
         }
 
+                if(E == 0) {
+                        $element.append(miss);
+                        F++
+                }
+                
+
+               
+                E = 0;
             console.log(id);
                     $(".rightField div:nth-child(" + id + ")") 
                             this.disabled = true;
