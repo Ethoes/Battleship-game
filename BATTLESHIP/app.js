@@ -8,7 +8,9 @@ var app = express();
 app.use(express.static(__dirname + "/public"));
 
 var server = http.createServer(app);
-const wss = new websocket.Server({ server });
+const wss = new websocket.Server({ server });<<<<<<< HEAD
+=======
+
 
 
 
@@ -16,7 +18,17 @@ app.get("/", function (req, res) {
   res.sendFile("splash.html", {root: "./public"});
   });
 
-  var Game = require("./game");
+  var Game = require("./game"s = {};
+var currentGame = new Game(gameStats.gamesInitialized++);
+var connectionID = 0;
+, 
+fu
+wss.on("connection");
+
+  var websockets = {};
+
+  var currentGame = new Game(gameStats.gamesInitialized++);
+  var connectionID = 0;
 
 
   // var game = function (gameID) {
@@ -83,9 +95,3 @@ server.listen(port);
 //   res.locals.message = err.message;
 //   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
-
-// module.exports = app;
