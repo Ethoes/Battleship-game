@@ -237,12 +237,14 @@ var main = function () {
                         $element.append(hit);
                         i++
                         E = 1;
+                        //send the message here for a click1
                 }
         }
 
                 if(E == 0) {
                         $element.append(miss);
                         F++
+                        //send the message here for a click2
                 }
                 
 
@@ -287,3 +289,6 @@ $(".leftField div").toArray().forEach(function (element) {
 
 
 $(document).ready(main);
+
+
+

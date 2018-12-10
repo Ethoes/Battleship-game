@@ -1,8 +1,12 @@
-var smolship = [];
-var smolship2 = [];
-var mediumship = [];
-var mediumship2 = [];
-var largeship = [];
+exampleSocket.onmessage = function (event) {
+    //console.log(event.data);
+    
+var smolship = [boardA[0], boardA[1]];
+var smolship2 = [boardA[2], board[3]];
+var mediumship = [boardA[4], boardA[5], boardA[6]];
+var mediumship2 = [boardA[7], boardA[8], boardA[9]];
+var largeship = [boardA[10], boardA[11], boardA[12], boardA[13]];
+}
 
 var currentship;
 

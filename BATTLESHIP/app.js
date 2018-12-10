@@ -8,9 +8,7 @@ var app = express();
 app.use(express.static(__dirname + "/public"));
 
 var server = http.createServer(app);
-const wss = new websocket.Server({ server });<<<<<<< HEAD
-=======
-
+const wss = new websocket.Server({ server });
 
 
 
