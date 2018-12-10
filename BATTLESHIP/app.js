@@ -15,49 +15,55 @@ var currentGame = new Game(gameStats.gamesInitialized++);
 var connectionID = 0;
 
 wss.on("connection", function connection(ws) {
+  
   let con = ws; 
-    con.id = connectionID++;
-    let playerType = currentGame.addPlayer(con);
-    websockets[con.id] = currentGame;
-    console.log("Player %s placed in game %s as %s", con.id, currentGame.id, playerType);
-    if (currentGame.hasTwoConnectedPlayers()) {
+  con.id = connectionID++;
+  
+  let playerType = currentGame.addPlayer(con);
+  websockets[con.id] = currentGame;
+    
+  console.log("Player %s placed in game %s as %s", con.id, currentGame.id, playerType);
+    
+  if (currentGame.hasTwoConnectedPlayers()) {
       currentGame = new Game(gameStatus.gamesInitialized++);
   }
+  
   con.on("message", function incoming(message) {
   
     let oMsg = JSON.parse(message);
  
-        let gameObj = websockets[con.id];
-        let isPlayerA = (gameObj.playerA == con) ? true : false;
-        if (isPlayerA) {
+    let gameObj = websockets[con.id];
+    let isPlayerA = (gameObj.playerA == con) ? true : false;
+    if (isPlayerA) {
             
             /*
              * player A cannot do a lot, just send the target word;
              * if player B is already available, send message to B
              */
-            if (oMsg.type == messages.T_TARGET_WORD) {/////////////////////change message
-                gameObj.setplayerAfield(oMsg.data);
-                if(gameObj.hasTwoConnectedPlayers()){
-                    gameObj.playerB.send(message); 
-                }     
+      if (oMsg.type == messages.T_TARGET_WORD) {/////////////////////change message
+        gameObj.setplayerAfield(oMsg.data);
+        if(gameObj.hasTwoConnectedPlayers()){
+          gameObj.playerB.send(message); 
+        }     
                 
-                if(oMsg.type == messages.T_MAKE_A_GUESS){
-                  gameObj.playerA.send(message);
-                  gameObj.setStatus("CHAR GUESSED");
-              }
-              if( oMsg.type == messages.T_GAME_WON_BY){
-                gameObj.setStatus(oMsg.data);
-                //game was won by somebody, update statistics
-                gameStatus.gamesCompleted++;
-            }  
-            }
+        if(oMsg.type == messages.T_MAKE_A_GUESS){
+          gameObj.playerA.send(message);
+          gameObj.setStatus("CHAR GUESSED");
         }
-        else {
-          if (oMsg.type == messages.T_TARGET_WORD) { ////////////////////message
-            gameObj.setplayerBfield(oMsg.data);
-            if(gameObj.hasTwoConnectedPlayers()){
-                gameObj.playerA.send(message); 
-            }                
+        
+        if( oMsg.type == messages.T_GAME_WON_BY){
+          gameObj.setStatus(oMsg.data);
+          //game was won by somebody, update statistics
+          gameStatus.gamesCompleted++;
+        }  
+      }
+    }
+      else {
+        if (oMsg.type == messages.T_TARGET_WORD) { ////////////////////message
+          gameObj.setplayerBfield(oMsg.data);
+          if(gameObj.hasTwoConnectedPlayers()){
+            gameObj.playerA.send(message); 
+          }                
         }
             /*
              * player B can make a guess; 
