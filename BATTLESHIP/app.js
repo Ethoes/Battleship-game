@@ -10,12 +10,22 @@ app.use(express.static(__dirname + "/public"));
 var server = http.createServer(app);
 const wss = new websocket.Server({ server })
 
+var gameStats = {
+  since : Date.now(),     /* since we keep it simple and in-memory, keep track of when this object was created */
+  shotsfired : 0,   /* number of games initialized */
+  playersonline : 0,       /* number of games aborted */
+  gamesCompleted : 0      /* number of games successfully completed */
+};
+
+var Game = require("./gamestate");
+
 var websockets = {};
 var currentGame = new Game(gameStats.gamesInitialized++);
 var connectionID = 0;
 
 wss.on("connection", function connection(ws) {
-  
+
+
   let con = ws; 
   con.id = connectionID++;
   
@@ -29,10 +39,16 @@ wss.on("connection", function connection(ws) {
   }
   
   con.on("message", function incoming(message) {
+
+
   
     let oMsg = JSON.parse(message);
  
     let gameObj = websockets[con.id];
+
+
+    gameObj.playerA.send("supder");
+
     let isPlayerA = (gameObj.playerA == con) ? true : false;
     
     if (isPlayerA) {
@@ -106,12 +122,7 @@ app.get("/", function (req, res) {
   // }
 
 
-  var gameStats = {
-    since : Date.now(),     /* since we keep it simple and in-memory, keep track of when this object was created */
-    shotsfired : 0,   /* number of games initialized */
-    playersonline : 0,       /* number of games aborted */
-    gamesCompleted : 0      /* number of games successfully completed */
-};
+  
 
 
 

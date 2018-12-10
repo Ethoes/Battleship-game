@@ -19,6 +19,23 @@ var clickedgrids = [];
 // var isshipvertical = false;
 // var howmanyturns = 0;
 
+var socket = new WebSocket("ws://localhost:3000");
+
+var msg = {
+    type: "message",
+    text: "sup",
+    id:   1
+  };
+
+$("button").on("click", function(){
+    socket.send(JSON.stringify(msg));
+})
+
+
+socket.onmessage = function(event){
+    console.log(event);
+}
+
 var main = function () {
     "use strict";
 
