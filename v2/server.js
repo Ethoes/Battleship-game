@@ -25,6 +25,7 @@
 var express = require("express"),
 http = require("http"),
 app = express();
+var cookies = require("cookie-parser");
 
 // set up a static file directory to use for default routing
 // also see the note below about Windows
@@ -39,6 +40,28 @@ http.createServer(app).listen(3000);
 // });
 
 // var htmlsht = splash.html;
+
+
+app.use(function(req, res, next) {
+    console.log('[LOG] %s\t%s\t%s\t%s', new Date().toISOString(), req.connection.remoteAddress,
+        req.method, req.url);
+    next(); // call on to next component
+});
+
+app.use(cookies("mysecret")); // this will encrypt cookies to avoid users tampering with them
+app.use(function(req, res, next) {
+    var userId = req.signedCookies.userId;
+    if(userId === undefined) { // no cookie
+        userId = ++usersCount;
+        console.log("# Setting new cookie for user " + userId);
+        res.cookie("userId", userId, {signed: true, httpOnly: true});
+    }
+    req.userId = parseInt(userId); // store the parsed userId for the next components
+    next(); // call on the next component
+});
+
+
+
 
 app.get("/", function (req, res) {
 res.sendFile("splash.html", {root: "./"});
