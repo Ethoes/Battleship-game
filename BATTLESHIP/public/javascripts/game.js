@@ -1,8 +1,17 @@
-var smolship;
-var smolship2;
-var mediumship;
-var mediumship2;
-var largeship;
+var cookiesArray = document.cookie.split('; ');
+var cookies=[];
+
+for(var i=0; i < cookiesArray.length; i++) {
+    var cookie = cookiesArray[i].split("=");
+    cookies[cookie[0]]=cookie[1];
+}
+
+var smolship = [cookies[1], cookies[2]];
+var smolship2 = [cookies[3], cookies[4]];
+var mediumship = [cookies[5], cookies[6], cookies[7]];
+var mediumship2 = [cookies[8], cookies[9], cookies[10]];
+var largeship = [cookies[11], cookies[12], cookies[13], cookies[14]];
+
 var shots;
 
 var smolship3;
@@ -15,6 +24,8 @@ var enemyShips = [smolship3, smolship4, mediumship3, mediumship4, largeship2];
 var ships = [smolship, smolship2, mediumship, mediumship2, largeship];
 
 var loss = 0;
+
+
 
 var socket = new WebSocket("ws://localhost:3000");
 
@@ -49,7 +60,7 @@ socket.onmessage = function (event) {
                 }
             
 
-            if(event.type == Messages.T_Set_Field){
+            
                 var boardA = event.data;
     
                 var smolship = [boardA[0], boardA[1]];
@@ -58,6 +69,16 @@ socket.onmessage = function (event) {
                 var mediumship2 = [boardA[7], boardA[8], boardA[9]];
                 var largeship = [boardA[10], boardA[11], boardA[12], boardA[13]];
     
+}
+
+
+
+var clicks = 0;
+var hits = 0;
+var F = 1;
+var i = 1;
+var E = 0;
+
                 //add the ship append code here
                 //showing the ships For smolship
                 const ship11 = document.querySelector('.ship1-1');
@@ -258,18 +279,9 @@ socket.onmessage = function (event) {
                         space52.appendChild(ship52);
                         space53.appendChild(ship53);
                         space54.appendChild(ship54); 
-                }
+                
 
         }
-}
-
-
-
-var clicks = 0;
-var hits = 0;
-var F = 1;
-var i = 1;
-var E = 0;
 
 var main = function () {
     "use strict";
@@ -322,13 +334,13 @@ var main = function () {
                                 Outmail.data = element.id;
                                 socket.send(JSON.stringify(Outmail));
 
-                                for(var i = 0; i < 49; i++){
-                                                document.querySelector(i + 'r').disable;
+                                for(var i = 1; i < 50; i++){
+                                                document.querySelector('.r' + i).disable;
                                 }
 
-                E = 0;
-            console.log(id);
-                    $(".rightField div:nth-child(" + id + ")") 
+                        E = 0;
+                        console.log(id);
+                        $(".rightField div:nth-child(" + id + ")") 
                             this.disabled = true;
                     
               
