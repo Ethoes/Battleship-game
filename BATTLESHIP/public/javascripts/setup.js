@@ -18,25 +18,31 @@ var shipimg;
 var prevgrid = null;
 
 var clickedgrids = [];
+
+var shipString = [];
+
+
 // var isshipvertical = false;
 // var howmanyturns = 0;
 
-var socket = new WebSocket("ws://localhost:3000");
+// var Messages = "./messages";
 
-var msg = {
-    type: "message",
-    text: "sup",
-    id:   1
-  };
+// var socket = new WebSocket("ws://localhost:3000");
 
-$("button").on("click", function(){
-    socket.send(JSON.stringify(msg));
-})
+// var msg = {
+//     type: "message",
+//     text: "sup",
+//     id:   1
+//   };
+
+// $("button").on("click", function(){
+//     socket.send(JSON.stringify(msg));
+// })
 
 
-socket.onmessage = function(event){
-    console.log(event);
-}
+// socket.onmessage = function(event){
+//     console.log(event);
+// }
 
 var main = function () {
     "use strict";
@@ -88,35 +94,78 @@ var main = function () {
 
                     $('.clicked').addClass("disabled");
                     
-                })
-
+                });
             };
         });
      });
     
     $("button").on("click", function(){
-        var shipString = [];
-        shipString[0] = smolship[0];
-        shipString[1] = smolship[1];
-        shipString[2] = smolship2[0];
-        shipString[3] = smolship2[1];
-        shipString[4] = mediumship[0];
-        shipString[5] = mediumship[1];
-        shipString[6] = mediumship[2];
-        shipString[7] = mediumship2[0];
-        shipString[8] = mediumship2[1];
-        shipString[9] = mediumship2[2];
-        shipString[10] = largeship[0];
-        shipString[11] = largeship[1];
-        shipString[12] = largeship[2];
-        shipString[13] = largeship[3];
+        // var shipString = [];
+        // shipString[0] = smolship[0];
+        // shipString[1] = smolship[1];
+        // shipString[2] = smolship2[0];
+        // shipString[3] = smolship2[1];
+        // shipString[4] = mediumship[0];
+        // shipString[5] = mediumship[1];
+        // shipString[6] = mediumship[2];
+        // shipString[7] = mediumship2[0];
+        // shipString[8] = mediumship2[1];
+        // shipString[9] = mediumship2[2];
+        // shipString[10] = largeship[0];
+        // shipString[11] = largeship[1];
+        // shipString[12] = largeship[2];
+        // shipString[13] = largeship[3];
 
-        var Outmail = Messages.O_Set_Field;
-        Outmail.data = shipString;
-        socket.send(JSON.stringify(Outmail));
+
+        // document.cookie = "name1=value1";
+        // console.log(Messages.O_Set_Field);
+
+        // let Outmail = Messages.O_Set_Field;
+
+        // if(Outmail.data == null)
+        // console.log(" u gay");
+        // console.log(Outmail);
+
+        // Outmail.data = shipString;
+        // socket.send(JSON.stringify(Outmail));
+
+        // $.post("setup", {}, function (response) {
+        //     console.log("message send");
+        //     console.log(response);
+        // })
+
+
+     
+        
+        document.cookie = "1=" + smolship[0] + "";
+        document.cookie = "2="+smolship[1];
+        document.cookie = "3="+smolship2[0];
+        document.cookie = "4="+smolship2[1];
+        document.cookie = "5="+mediumship[0];
+        document.cookie = "6="+mediumship[1];
+        document.cookie = "7="+mediumship[2];
+        document.cookie = "8="+mediumship2[0];
+        document.cookie = "9="+mediumship2[1];
+        document.cookie = "10="+mediumship2[2];
+        document.cookie = "11="+largeship[0];
+        document.cookie = "12="+largeship[1];
+        document.cookie = "13="+largeship[2];
+        document.cookie = "14="+largeship[3];
+
+        // var cookiesArray = document.cookie.split('; ');
+        //     var cookies=[];
+
+        // for(var i=0; i < cookiesArray.length; i++) {
+        //     var cookie = cookiesArray[i].split("=");
+        // cookies[cookie[0]]=cookie[1];
+        // }
 
     
     });
+
+    // socket.onmessage = function(incomming){
+    //     console.log(incomming);
+    // }
 
     $(".Field div").toArray().forEach(function (elementgrid) {
         $(elementgrid).on("click", function () {

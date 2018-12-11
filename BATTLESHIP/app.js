@@ -5,6 +5,9 @@ var websocket = require("ws");
 var port = process.argv[2];
 var app = express();
 
+var cookies = require("cookie-parser"); //////////////////////
+app.use(cookies("my_secret_abc_123"));
+
 app.use(express.static(__dirname + "/public"));
 
 var server = http.createServer(app);
@@ -25,16 +28,24 @@ var websockets = {};
 var currentGame = new Game(gameStats.gamesInitialized++);
 var connectionID = 0;
 
+
 wss.on("connection", function connection(ws) {
 
 
   let con = ws; 
-  con.id = connectionID++;
+  con.id = connectionID;
+
+  console.log("cookie " + con.cookie);
+  // res.cookie("signed_chocolate", "monster", { signed: true });
+  // con.cookies("cookies for game", "sup bot", { signed: true});
   
   let playerType = currentGame.addPlayer(con);
+  currentGame.setState(playerType);
   websockets[con.id] = currentGame;
     
   console.log("Player %s placed in game %s as %s", con.id, currentGame.id, playerType);
+
+  // console.log(currentGame.playerA);
     
   if (currentGame.hasTwoConnectedPlayers()) {
       currentGame = new Game(gameStatus.gamesInitialized++);
@@ -47,12 +58,14 @@ wss.on("connection", function connection(ws) {
     let oMsg = JSON.parse(message);
  
     let gameObj = websockets[con.id];
-    console.log(oMsg.type);
+    // console.log( "first log "+ oMsg.type + "   " +Messages.T_Set_Field);
+    // console.log(oMsg.type === Messages.T_Set_Field);
 
 
-    con.send("supder");
+    // con.send("supder");
 
     let isPlayerA = (gameObj.playerA == con) ? true : false;
+    // console.log(gameObj.playerA == con);
     
     if (isPlayerA) {
             
@@ -60,13 +73,19 @@ wss.on("connection", function connection(ws) {
              * player A cannot do a lot, just send the target word;
              * if player B is already available, send message to B
              */
-      if (oMsg.type == Messages.O_Set_Field) {
+      if (oMsg.type === Messages.T_Set_Field) {
+        console.log("this is the fucking problem");
         
         gameObj.setplayerAfield(oMsg.data);
         if(gameObj.hasTwoConnectedPlayers()){
           gameObj.playerB.send(message); 
-        }     
-        gameObj.playerAsend(message);
+          
+        } 
+
+        // setTimeout(function(){  
+        // console.log(message.data);    
+        gameObj.playerA.send(message);
+      // }, 300);
                 
         if(oMsg.type == Messages.T_MAKE_A_GUESS){
           gameObj.playerA.send(message);
@@ -109,17 +128,33 @@ wss.on("connection", function connection(ws) {
 })
 
 
+// app.use(cookies("my_secret_abc_123"));
+
+
 app.get("/", function (req, res) {
   res.sendFile("splash.html", {root: "./public"});
   });
 
   app.get("/setup", function (req, res) {
+  //   res.cookie("chocolate", "kruemel");
+	//  res.cookie("session", connectionID++);
     res.sendFile("setup.html", {root: "./public"});
+    // console.log(req.cookies);
     });
 
     app.get("/game", function (req, res) {
       res.sendFile("game.html", {root: "./public"});
+      // usrid = req.cookies.session;
+      // console.log(usrid);
+      console.log(req.cookies);
       });
+
+
+      // app.post("/setup", function (req, res) {
+      //   console.log("data has been posted to the server!");
+      //   // send back a simple object
+      //   res.json({"message":"You posted to the server!"});
+      //   });
 
   // var game = function (gameID) {
   //   this.playerA = null;
@@ -131,6 +166,20 @@ app.get("/", function (req, res) {
   //   this.playerBField = {};
   // }
 
+
+
+
+//   app.use(cookies("mysecret")); // this will encrypt cookies to avoid users tampering with them
+// app.use(function(req, res, next) {
+//     var userId = req.signedCookies.userId;
+//     if(userId === undefined) { // no cookie
+//         userId = ++usersCount;
+//         console.log("# Setting new cookie for user " + userId);
+//         res.cookie("userId", userId, {signed: true, httpOnly: true});
+//     }
+//     req.userId = parseInt(userId); // store the parsed userId for the next components
+//     next(); // call on the next component
+// });
 
   
 

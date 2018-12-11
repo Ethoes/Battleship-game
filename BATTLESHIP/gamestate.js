@@ -1,6 +1,6 @@
 var game = function (gameID) {
-    this.playerA = null;
-    this.playerB = null;
+    this.playerA;
+    this.playerB;
     this.id = gameID;
     this.playerAhits = {};
     this.playerBhits = {};
@@ -10,7 +10,17 @@ var game = function (gameID) {
   }
 
   game.prototype.setState = function(state) {
-      this.gameState = state;
+      if(state == "A"){
+          this.gameState = "1 JOINT";
+      }
+
+      if(state == "B")
+       this.gameState = "2 JOINT";
+
+    else{
+        this.gameState = "0 JOINT";
+    }
+      
   }
 
 
@@ -57,7 +67,7 @@ var game = function (gameID) {
 
     
     if(this.gameState == "0 JOINT"){
-        this.playerA == p;
+        this.playerA = p;
         return "A";
     }
 

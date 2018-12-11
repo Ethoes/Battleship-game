@@ -13,7 +13,7 @@
 
     exports.T_Set_Field = "FIELD" 
     exports.O_Set_Field = {
-        type: exports.O_Set_Field,
+        type: exports.T_Set_Field,
         data: null
     };
 

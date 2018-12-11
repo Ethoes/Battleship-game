@@ -1,21 +1,38 @@
-//var smolship = [1, 2];
-//var smolship2 = [3, 4];
-//var mediumship = [16, 23, 30];
-//var mediumship2 = [8, 9, 10];
-//var largeship = [46, 47, 48, 49];
+var cookiesArray = document.cookie.split('; ');
+var cookies=[];
+
+for(var i=0; i < cookiesArray.length; i++) {
+    var cookie = cookiesArray[i].split("=");
+    cookies[cookie[0]]=cookie[1];
+}
+
+var smolship = [cookies[1], cookies[2]];
+var smolship2 = [cookies[3], cookies[4]];
+var mediumship = [cookies[5], cookies[6], cookies[7]];
+var mediumship2 = [cookies[8], cookies[9], cookies[10]];
+var largeship = [cookies[11], cookies[12], cookies[13], cookies[14]];
+
+var smolship;
+var smolship2;
+var mediumship;
+var mediumship2;
+var largeship;
+
+var socket = new WebSocket("ws://localhost:3000");
+
+socket.onmessage = function (event) {
+        console.log(event.data);
 
 
-"ws://localhost:3000".onmessage = function (event) {
-        //console.log(event.data);
         
             if(event.type == Messages.T_Set_Field){
                 var boardA = event.data;
     
-                var smolship = [boardA[0], boardA[1]];
-                var smolship2 = [boardA[2], board[3]];
-                var mediumship = [boardA[4], boardA[5], boardA[6]];
-                var mediumship2 = [boardA[7], boardA[8], boardA[9]];
-                var largeship = [boardA[10], boardA[11], boardA[12], boardA[13]];
+                smolship = [boardA[0], boardA[1]];
+                smolship2 = [boardA[2], board[3]];
+                mediumship = [boardA[4], boardA[5], boardA[6]];
+                mediumship2 = [boardA[7], boardA[8], boardA[9]];
+                largeship = [boardA[10], boardA[11], boardA[12], boardA[13]];
     
                 //add the ship append code here
                 //showing the ships For smolship
