@@ -3,6 +3,7 @@ var smolship2 = [];
 var mediumship = [];
 var mediumship2 = [];
 var largeship = [];
+var shots = [];
 
 var smolship3;
 var smolship4;
@@ -23,6 +24,12 @@ socket.onmessage = function (event) {
                 }
                 if(!(ships[index].includes(id))){
                 spaaaace.className += ' smallDick'
+                }
+                for(var i = 0; i < 49; i++){
+                        if(!(shots.includes(id))){
+                        document.querySelector(i + 'r').enable;
+                        }
+                }
                 }
             }
 
@@ -283,7 +290,7 @@ var main = function () {
                         //send the message here for a click2
                 }
                 
-
+                shots[clicks] = id;
                 clicks++;
                         //hit trackers
                         if(hits == 14){
@@ -298,6 +305,10 @@ var main = function () {
                                 var Outmail = Messages.O_Shot;
                                 Outmail.data = element.id;
                                 socket.send(JSON.stringify(Outmail));
+
+                                for(var i = 0; i < 49; i++){
+                                                document.querySelector(i + 'r').disable;
+                                }
 
                 E = 0;
             console.log(id);

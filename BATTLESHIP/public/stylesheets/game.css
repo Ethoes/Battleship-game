@@ -144,13 +144,18 @@ div div.fill1 {
     float: top;
 }
 
+<<<<<<< HEAD
 .miss{
     opacity:0.5;
 }
+=======
+
+>>>>>>> 0cd48eb3e23059574a79efacc1b9f0d173d10a9a
 
 .visible{
     visibility: visible !important;
 }
+<<<<<<< HEAD
 
 .bigDick {
     background: pink;
@@ -161,3 +166,5 @@ div div.fill1 {
     background: darkred;
     opacity:0.5;
 }
+=======
+>>>>>>> 0cd48eb3e23059574a79efacc1b9f0d173d10a9a
