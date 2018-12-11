@@ -16,9 +16,9 @@ header img {
 
 section.Field{
     width: 700px;
-    background: blue;
+    /*background: blue;*/
     padding: 7px;
-    border: 2px solid;
+   /* border: 2px solid;*/
     color: black;
     margin: auto;
     float: left;
@@ -38,7 +38,7 @@ div.row {
 div div {
     width: 92px;
     height: 92px;
-    background: rgb(27, 26, 102);
+    /*background: rgb(27, 26, 102);*/
     border: 2px solid;
     /* padding: 40px; */
     
@@ -53,7 +53,9 @@ div div:hover {
 }
 
 div div.clicked.disabled {
-    background: yellow;
+    /*background: yellow;*/
+    background: none;
+    opacity: 1;
     pointer-events: none;
 }
 
@@ -63,7 +65,8 @@ div div.available {
 
 div div.disabled {
     pointer-events: none;
-    background: green;
+    background: darkblue;
+    opacity: 0.5;
 
 }
 
@@ -160,4 +163,28 @@ img.ship.clicked {
 img.ship.disable {
     background: green;
     pointer-events: none;
+}
+
+.opponentboard{
+    position: relative;
+    top: -755px;
+    left: -12px;
+    height: 758px !important;
+    width: 700px !important;
+    z-index: -20;
+}
+
+.Ships{
+    visibility: hidden;
+}
+
+.Left{
+    transform: rotate(180deg);
+}
+.Down{
+    transform: rotate(90deg);
+}
+
+.Up{
+    transform: rotate(-90deg);
 }
