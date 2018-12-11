@@ -1,9 +1,9 @@
-var smolship = [1, 2];
-var smolship2 = [];
-var mediumship = [];
-var mediumship2 = [];
-var largeship = [];
-var shots = [];
+var smolship;
+var smolship2;
+var mediumship;
+var mediumship2;
+var largeship;
+var shots;
 
 var smolship3;
 var smolship4;
@@ -11,16 +11,32 @@ var mediumship3;
 var mediumship4;
 var largeship2;
 
+var enemyShips = [smolship3, smolship4, mediumship3, mediumship4, largeship2];
+var ships = [smolship, smolship2, mediumship, mediumship2, largeship];
+
+var loss = 0;
+
 var socket = new WebSocket("ws://localhost:3000");
 
 socket.onmessage = function (event) {
         //console.log(event.data);
+
+            if(event.type == Messages.T_Set_Field){
+                    var boardB = event.data;
+                    
+                    var smolship3 = [boardB[0], boardB[1]];
+                    var smolship4 = [boardB[2], boardB[3]];
+                    var mediumship3 = [boardB[4], boardB[5], boardB[6]];
+                    var mediumship4 = [boardB[7], boardB[8], boardB[9]];
+                    var largeship2 = [boardB[10], boardB[11], boardB[12], boardB[13]];
+            }
         
             if(event.type == Messages.T_Shot){
                 var Id = event.data;
                 const spaaaace = document.getElementById(Id);
                 if(ships[index].includes(id)){
                 spaaaace.className += ' bigDick';
+                loss++;
                 }
                 if(!(ships[index].includes(id))){
                 spaaaace.className += ' smallDick'
@@ -31,13 +47,13 @@ socket.onmessage = function (event) {
                         }
                 }
                 }
-            }
+            
 
             if(event.type == Messages.T_Set_Field){
                 var boardA = event.data;
     
                 var smolship = [boardA[0], boardA[1]];
-                var smolship2 = [boardA[2], board[3]];
+                var smolship2 = [boardA[2], boardA[3]];
                 var mediumship = [boardA[4], boardA[5], boardA[6]];
                 var mediumship2 = [boardA[7], boardA[8], boardA[9]];
                 var largeship = [boardA[10], boardA[11], boardA[12], boardA[13]];
@@ -247,7 +263,7 @@ socket.onmessage = function (event) {
         }
 }
 
-var ships = [smolship, smolship2, mediumship, mediumship2, largeship];
+
 
 var clicks = 0;
 var hits = 0;
@@ -296,7 +312,7 @@ var main = function () {
                         if(hits == 14){
                                 alert("winner, winner chicken dinner!");
                         }
-                        if(clicks == 49){
+                        if(loss == 14){
                                 alert("you lost fam");
                         }
                         console.log(clicks);
