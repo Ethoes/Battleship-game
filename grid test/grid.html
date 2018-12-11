@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="Style.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="container">
+        <div id="1" class="item" ondrop="drop(event)" ondragover="allowDrop(event)">item-a</div>
+        <div id="2" class="item" ondrop="drop(event)" ondragover="allowDrop(event)">item-b</div>
+        <div id="3" class="item" ondrop="drop(event)" ondragover="allowDrop(event)">item-c</div>
+        <div id="4" class="item" ondrop="drop(event)" ondragover="allowDrop(event)">item-d</div>
+        <div id="5" class="item" ondrop="drop(event)" ondragover="allowDrop(event)">item-e</div>
+        <div id="6" class="item" ondrop="drop(event)" ondragover="allowDrop(event)">item-f</div>
+    </div>
+
+    <footer>
+        <img id="drag1" src="twoShip.png" draggable="true" ondragstart="drag(event)" width="180" height="69">
+    </footer>
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="java.js"></script>
+</body>
+</html>

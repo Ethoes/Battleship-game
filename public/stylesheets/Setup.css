@@ -1,0 +1,190 @@
+body {
+    width: 1280px;
+    background: rgb(30, 29, 48);
+    margin: auto;
+}
+
+header img {
+    
+    margin: auto;
+    padding: 30px;
+      
+      display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+section.Field{
+    width: 700px;
+    /*background: blue;*/
+    padding: 7px;
+   /* border: 2px solid;*/
+    color: black;
+    margin: auto;
+    float: left;
+
+}
+
+div.row {
+    background: grey;
+    width: 700px;
+    /* height: 90px; */
+    float: top;
+    /* border: 2px solid;
+    border-color: red; */
+    
+}
+
+div div {
+    width: 92px;
+    height: 92px;
+    /*background: rgb(27, 26, 102);*/
+    border: 2px solid;
+    /* padding: 40px; */
+    
+    /* border-bottom: 10px; */
+    border-color: black;
+    float: left;
+    /* margin: auto; */
+}
+
+div div:hover {
+    background: cyan;
+}
+
+div div.clicked.disabled {
+    /*background: yellow;*/
+    background: none;
+    opacity: 1;
+    pointer-events: none;
+}
+
+div div.available {
+    background: white;
+}
+
+div div.disabled {
+    pointer-events: none;
+    background: darkblue;
+    opacity: 0.5;
+
+}
+
+
+
+/* div div.clicked:hover {
+    background: red;
+} */
+
+section.shipsetc {
+    background: rgb(30, 169, 194);
+    border: 3px;
+    border-color: black;
+    border-style: solid;
+    width: 420px;
+    height: 680px;
+    float: left;
+    /* margin-right: 100px; */
+
+    margin-left: 40px;
+}
+
+section.infotostart {
+    background: yellow;
+    border-bottom: 4px solid;
+    border-color: black;
+    height: 110px;
+    /* width: 700; */
+}
+
+div.enterusrnm {
+    padding: 6px;
+    margin-left: 50px;
+   
+}
+
+input {
+    padding: 5px;
+    margin-left: 19px;
+    margin-right: 10px;
+    float: left;
+}
+
+button {
+    float: left;
+    margin-top: 4px;
+    margin-right: 37px;
+    margin-bottom: 5px;
+}
+
+div.indicator {
+    padding: 6px;
+    margin-left: 10px;
+    margin-top: 12px;
+    float: left;
+    background: red;
+    width: 7px;
+    height: 7px;
+    border-radius: 25px;
+    margin-right: 1px;
+    
+}
+
+div.otherplayerstatus {
+    padding: 10px;
+    float: left;
+    
+}
+
+div.tutorial {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+img {
+    padding: 4px;
+    /* margin-top: 1px; */
+    /* float: left; */
+    margin-right: 40px;
+    margin-bottom: 6px;
+}
+
+img.ship:hover {
+    background: red;
+
+
+}
+
+img.ship.clicked {
+
+    background: gold;
+}
+
+img.ship.disable {
+    background: green;
+    pointer-events: none;
+}
+
+.opponentboard{
+    position: relative;
+    top: -755px;
+    left: -12px;
+    height: 758px !important;
+    width: 700px !important;
+    z-index: -20;
+}
+
+.Ships{
+    visibility: hidden;
+}
+
+.Left{
+    transform: rotate(180deg);
+}
+.Down{
+    transform: rotate(90deg);
+}
+
+.Up{
+    transform: rotate(-90deg);
+}
