@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //var smolship = [1, 2];
 //var smolship2 = [3, 4];
 //var mediumship = [16, 23, 30];
@@ -221,17 +222,30 @@ exampleSocket.onmessage = function (event) {
         }
 }
 
+=======
+var smolship = [5, 6];
+var smolship2 = [2, 3];
+var mediumship = [16 , 23, 30];
+var mediumship2 = [20, 27, 34];
+
+var largeship = [ 18, 25, 32 , 39];
+>>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
 var ships = [smolship, smolship2, mediumship, mediumship2, largeship];
 
 var clicks = 0;
 var hits = 0;
+<<<<<<< HEAD
 var F = 1;
 var i = 1;
 var E = 0;
+=======
+
+>>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
 
 var main = function () {
     "use strict";
 
+<<<<<<< HEAD
     
     $(".rightField div").toArray().forEach(function (element) {
         // create a click handler for this element
@@ -243,10 +257,22 @@ var main = function () {
             var id = Number(element.id); 
             const hit = document.querySelector('.hit'+i);
             const miss = document.querySelector('.miss' + F);
+=======
+
+    $(".leftField div").toArray().forEach(function (element) {
+        // create a click handler for this element
+        $(element).on("click", function () {
+           
+            var $element = $(element);
+            console.log($element);
+            $element.addClass("clicked");
+            var id = Number(element.id);
+>>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
 
             for(var index = 0; index < ships.length; index++){
                 if(ships[index].includes(id)){
                         console.log("that's a hit");
+<<<<<<< HEAD
                         //$element.addClass("hit");
                         var F = 1;
                         var i = 1;
@@ -288,20 +314,48 @@ var main = function () {
                     
               
            
+=======
+                        $element.addClass("hit");
+                        hits++;
+                }
+        }
+
+            
+
+            clicks ++;
+
+            if(hits == 14){
+                    alert("winner, winner chicken dinner!");
+            }
+            if(clicks == 49){
+                    alert("you lost fam");
+            }
+            console.log(clicks);
+
+      
+>>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
             return false;
         });
         });
 
 
+<<<<<<< HEAD
 $(".leftField div").toArray().forEach(function (element) {
         
         $(element).on("click", function () {
             
+=======
+$(".rightField div").toArray().forEach(function (element) {
+        // create a click handler for this element
+        $(element).on("click", function () {
+            //$(".tabs a span").removeClass("active");
+>>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
             var $element = $(element);
             console.log($element);
             $element.addClass("active");
             var id = element.id;
 
+<<<<<<< HEAD
             console.log(id);
             
                     $(".rightField div:nth-child(" + id + ")") 
@@ -310,10 +364,14 @@ $(".leftField div").toArray().forEach(function (element) {
             this.disable = true;
 
            alert("Wrong field dickhead");
+=======
+            this.disable = true;
+>>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
             return false;
         });
         });
 
+<<<<<<< HEAD
 
         
 };
@@ -324,3 +382,9 @@ $(document).ready(main);
 
 
 
+=======
+};
+
+
+$(document).ready(main);
+>>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002

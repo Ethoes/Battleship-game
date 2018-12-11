@@ -4,10 +4,16 @@ background: rgb(47, 50, 65);
 margin: auto;
 }
 
+<<<<<<< HEAD
 /* img .logo {
      max-height: 600px;
      float: right;
 } */
+=======
+img {
+     max-height: 600px;
+}
+>>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
 
 header, main, footer {
     min-width: 855px;
@@ -20,11 +26,18 @@ main {
 }
 section.leftField{
     width: 700px;
+<<<<<<< HEAD
     /*background: blue;*/
     background: none;
     padding: 7px;
     /*border: 1px solid;*/
     /*color: black;*/
+=======
+    background: blue;
+    padding: 7px;
+    border: 2px solid;
+    color: black;
+>>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
     margin: auto;
     float: left;
 
@@ -32,7 +45,11 @@ section.leftField{
 
 section.rightField{
     width: 700px;
+<<<<<<< HEAD
     /*background: green;*/
+=======
+    background: green;
+>>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
     padding: 7px;
     border: 1px;
     color: white;
@@ -40,6 +57,7 @@ section.rightField{
     float:right;
 }
 
+<<<<<<< HEAD
 
 div div{
     width: 92px;
@@ -50,23 +68,53 @@ div div{
     
     /* border-bottom: 10px; */
     /*border-color: black;*/
+=======
+div.row {
+    background: grey;
+    width: 700px;
+    /* height: 90px; */
+    float: top;
+    /* border: 2px solid;
+    border-color: red; */
+    
+}
+
+div div {
+    width: 92px;
+    height: 92px;
+    background: rgb(27, 26, 102);
+    border: 2px solid;
+    /* padding: 40px; */
+    
+    /* border-bottom: 10px; */
+    border-color: black;
+>>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
     float: left;
     /* margin: auto; */
 }
 
 div div:hover {
+<<<<<<< HEAD
     background: cyan ;
     opacity:0.5;
 }
 
 div div.clicked {
     /*background: yellow;*/
+=======
+    background: cyan;
+}
+
+div div.clicked {
+    background: yellow;
+>>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
     pointer-events: none;
 }
 
 div div.clicked.hit {
     background: red;
 }
+<<<<<<< HEAD
 
 div div.fill1 {
     background: none;
@@ -149,3 +197,5 @@ div div.fill1 {
 .visible{
     visibility: visible !important;
 }
+=======
+>>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
