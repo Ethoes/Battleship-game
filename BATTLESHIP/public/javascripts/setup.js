@@ -77,6 +77,29 @@ var main = function () {
         });
      });
     
+    $("button").on("click", function(){
+        var shipString = [];
+        shipString[0] = smolship[0];
+        shipString[1] = smolship[1];
+        shipString[2] = smolship2[0];
+        shipString[3] = smolship2[1];
+        shipString[4] = mediumship[0];
+        shipString[5] = mediumship[1];
+        shipString[6] = mediumship[2];
+        shipString[7] = mediumship2[0];
+        shipString[8] = mediumship2[1];
+        shipString[9] = mediumship2[2];
+        shipString[10] = largeship[0];
+        shipString[11] = largeship[1];
+        shipString[12] = largeship[2];
+        shipString[13] = largeship[3];
+
+        var Outmail = Messages.O_Set_Field;
+        Outmail.data = shipString;
+        socket.send(JSON.stringify(Outmail));
+
+    
+    });
 
     $(".Field div").toArray().forEach(function (elementgrid) {
         $(elementgrid).on("click", function () {
