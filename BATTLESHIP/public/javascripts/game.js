@@ -3,7 +3,6 @@ var smolship2 = [2, 3];
 var mediumship = [16 , 23, 30];
 var mediumship2 = [20, 27, 34];
 
-var largeship = [ 18, 25, 32 , 39];
 var ships = [smolship, smolship2, mediumship, mediumship2, largeship];
 
 var clicks = 0;
@@ -31,8 +30,12 @@ var main = function () {
                 }
         }
 
-            
-
+                if(E == 0) {
+                        $element.append(miss);
+                        F++
+                        //send the message here for a click2
+                }
+                
             clicks ++;
 
             if(hits == 14){
