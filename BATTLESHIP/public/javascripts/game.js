@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //var smolship = [1, 2];
 //var smolship2 = [3, 4];
 //var mediumship = [16, 23, 30];
@@ -222,14 +221,6 @@ exampleSocket.onmessage = function (event) {
         }
 }
 
-=======
-var smolship = [5, 6];
-var smolship2 = [2, 3];
-var mediumship = [16 , 23, 30];
-var mediumship2 = [20, 27, 34];
-
-var largeship = [ 18, 25, 32 , 39];
->>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
 var ships = [smolship, smolship2, mediumship, mediumship2, largeship];
 
 var clicks = 0;
