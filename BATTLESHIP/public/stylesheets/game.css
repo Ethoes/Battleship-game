@@ -4,9 +4,10 @@ background: rgb(47, 50, 65);
 margin: auto;
 }
 
-img {
+/* img .logo {
      max-height: 600px;
-}
+     float: right;
+} */
 
 header, main, footer {
     min-width: 855px;
@@ -19,10 +20,11 @@ main {
 }
 section.leftField{
     width: 700px;
-    background: blue;
+    /*background: blue;*/
+    background: none;
     padding: 7px;
-    border: 2px solid;
-    color: black;
+    /*border: 1px solid;*/
+    /*color: black;*/
     margin: auto;
     float: left;
 
@@ -30,7 +32,7 @@ section.leftField{
 
 section.rightField{
     width: 700px;
-    background: green;
+    /*background: green;*/
     padding: 7px;
     border: 1px;
     color: white;
@@ -38,38 +40,112 @@ section.rightField{
     float:right;
 }
 
-div.row {
-    background: grey;
-    width: 700px;
-    /* height: 90px; */
-    float: top;
-    /* border: 2px solid;
-    border-color: red; */
-    
-}
 
-div div {
+div div{
     width: 92px;
     height: 92px;
-    background: rgb(27, 26, 102);
-    border: 2px solid;
+    /*background: rgb(27, 26, 102);*/
+    /*border: 1px solid;*/
     /* padding: 40px; */
     
     /* border-bottom: 10px; */
-    border-color: black;
+    /*border-color: black;*/
     float: left;
     /* margin: auto; */
 }
 
 div div:hover {
-    background: cyan;
+    background: cyan ;
+    opacity:0.5;
 }
 
 div div.clicked {
-    background: yellow;
+    /*background: yellow;*/
     pointer-events: none;
 }
 
 div div.clicked.hit {
     background: red;
+}
+
+div div.fill1 {
+    background: none;
+    border: none;
+    background-image: url("twoShip.png");
+    
+    /* position: relative; */
+    height: 200;
+    width: 200;
+    /* top: 5px;
+    left: 5px; */
+    cursor: pointer;
+    -webkit-user-drag: auto;
+}
+
+/* [draggable=true] {
+    cursor: move;
+} */
+
+.Left{
+    transform: rotate(180deg);
+}
+.Down{
+    transform: rotate(90deg);
+}
+
+.Up{
+    transform: rotate(-90deg);
+}
+
+.playerboard{
+    position: relative;
+    width: 680px;
+    height: 738px;
+    top: -720px;
+    left: -11px;
+    z-index: -20;
+}
+
+.opponentboard{
+    position: relative;
+    height: 728px;
+    width: 669px;
+    top: -730px;
+    left: 395px;
+    z-index: -20;
+}
+
+.ship5-1{
+    height: 70px;
+    width: 100px;
+}
+
+.ship5-2{
+    height: 70px;
+    width: 100px;
+}
+
+.ship5-3{
+    height: 70px;
+    width: 100px;
+}
+
+.ship5-4{
+    height: 70px;
+    width: 90px;
+}
+
+
+.hitOrMiss{
+    visibility: hidden;
+    width: 85px;
+    height: 85px;
+    position: fixed;
+    float: top;
+}
+
+
+
+.visible{
+    visibility: visible !important;
 }
