@@ -27,6 +27,7 @@ var Game = require("./gamestate");
 var websockets = {};
 var currentGame = new Game(gameStats.gamesInitialized++);
 var connectionID = 0;
+var messageAField;
 
 
 wss.on("connection", function connection(ws) {
@@ -85,20 +86,21 @@ wss.on("connection", function connection(ws) {
         
         
         gameObj.setplayerAfield(oMsg.data);
-        if(gameObj.hasTwoConnectedPlayers()){
+        messageAField = message;
+        // if(gameObj.hasTwoConnectedPlayers()){
 
-          console.log("sending field to b and a ");
+        //   console.log("sending field to b and a ");
 
-          gameObj.playerB.send(message); 
-          var bericht = Messages.O_Set_Field;
-          bericht.data = gameObj.getplayerBField;
-          gameObj.playerA.send(JSON.stringify(bericht));
+        //   gameObj.playerB.send(message); 
+        //   var bericht = Messages.O_Set_Field;
+        //   bericht.data = gameObj.getplayerBField;
+        //   gameObj.playerA.send(JSON.stringify(bericht));
           
-        } 
+        // } 
 
         // setTimeout(function(){  
         // console.log(message.data);    
-        gameObj.playerA.send(message);
+        // gameObj.playerA.send(message);
       // }, 300);
                 
         if(oMsg.type == Messages.T_MAKE_A_GUESS){
@@ -121,13 +123,14 @@ wss.on("connection", function connection(ws) {
           if(gameObj.hasTwoConnectedPlayers()){
 
 
-            console.log("sendig drom b ")
+            console.log("sendig from b ")
             // console.log(gameObj.playerB);
             gameObj.playerA.send(message); 
-            var bericht = Messages.O_Set_Field;
-            bericht.data = gameObj.getplayerAField;
-            gameObj.playerB.send(JSON.stringify(bericht));
+            // var bericht = Messages.O_Set_Field;
+            // bericht.data = gameObj.getplayerAField;
+            // gameObj.playerB.send(JSON.stringify(bericht));
 
+            gameObj.playerB.send(messageAField);
           }                
         }
             /*

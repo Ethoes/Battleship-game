@@ -57,21 +57,24 @@ socket.onopen = function () {
 console.log(smolship3);
 
 socket.onmessage = function (event) {
+        
+
+        console.log(event.data);
 
         let oMsg = JSON.parse(event.data);
 
-        console.log(oMsg);
+        console.log(oMsg.data[0]);
 
             if(oMsg.type == Messages.T_Set_Field){
-                    var boardB = oMsg;
+                    var boardB = oMsg.data;
 
-                    console.log("setting opponents field" + boardB);
+                    console.log("setting opponents field " + parseInt(boardB));
                     
-                    var smolship3 = [boardB[0], boardB[1]];
-                    var smolship4 = [boardB[2], boardB[3]];
-                    var mediumship3 = [boardB[4], boardB[5], boardB[6]];
-                    var mediumship4 = [boardB[7], boardB[8], boardB[9]];
-                    var largeship2 = [boardB[10], boardB[11], boardB[12], boardB[13]];
+                    smolship3 = [boardB[0], boardB[1]];
+                    smolship4 = [boardB[2], boardB[3]];
+                    mediumship3 = [boardB[4], boardB[5], boardB[6]];
+                    mediumship4 = [boardB[7], boardB[8], boardB[9]];
+                    largeship2 = [boardB[10], boardB[11], boardB[12], boardB[13]];
             }
         
             if(oMsg.type == Messages.T_Shot){
