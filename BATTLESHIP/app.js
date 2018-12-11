@@ -10,11 +10,13 @@ app.use(express.static(__dirname + "/public"));
 var server = http.createServer(app);
 const wss = new websocket.Server({ server })
 
+var Messages = require("./public/javascripts/messages.js");
+
 var gameStats = {
   since : Date.now(),     /* since we keep it simple and in-memory, keep track of when this object was created */
   shotsfired : 0,   /* number of games initialized */
   playersonline : 0,       /* number of games aborted */
-  gamesCompleted : 0      /* number of games successfully completed */
+  gamesInitialized: 0      /* number of games successfully completed */
 };
 
 var Game = require("./gamestate");
@@ -45,9 +47,10 @@ wss.on("connection", function connection(ws) {
     let oMsg = JSON.parse(message);
  
     let gameObj = websockets[con.id];
+    console.log(oMsg.type);
 
 
-    gameObj.playerA.send("supder");
+    con.send("supder");
 
     let isPlayerA = (gameObj.playerA == con) ? true : false;
     
@@ -57,19 +60,20 @@ wss.on("connection", function connection(ws) {
              * player A cannot do a lot, just send the target word;
              * if player B is already available, send message to B
              */
-      if (oMsg.type == messages.O_Set_Field) {
+      if (oMsg.type == Messages.O_Set_Field) {
         
         gameObj.setplayerAfield(oMsg.data);
         if(gameObj.hasTwoConnectedPlayers()){
           gameObj.playerB.send(message); 
         }     
+        gameObj.playerAsend(message);
                 
-        if(oMsg.type == messages.T_MAKE_A_GUESS){
+        if(oMsg.type == Messages.T_MAKE_A_GUESS){
           gameObj.playerA.send(message);
           gameObj.setStatus("CHAR GUESSED");
         }
         
-        if( oMsg.type == messages.T_GAME_WON_BY){
+        if( oMsg.type == Messages.T_GAME_WON_BY){
           gameObj.setStatus(oMsg.data);
           //game was won by somebody, update statistics
           gameStatus.gamesCompleted++;
@@ -77,7 +81,7 @@ wss.on("connection", function connection(ws) {
       }
     }
       else {
-        if (oMsg.type == messages.O_Set_Field) { 
+        if (oMsg.type == Messages.O_Set_Field) { 
           gameObj.setplayerBfield(oMsg.data);
           if(gameObj.hasTwoConnectedPlayers()){
             gameObj.playerA.send(message); 
@@ -87,14 +91,14 @@ wss.on("connection", function connection(ws) {
              * player B can make a guess; 
              * this guess is forwarded to A
              */ 
-            if(oMsg.type == messages.T_MAKE_A_GUESS){
+            if(oMsg.type == Messages.T_MAKE_A_GUESS){
                 gameObj.playerA.send(message);
                 gameObj.setStatus("CHAR GUESSED");
             }
             /*
              * player B can state who won/lost
              */ 
-            if( oMsg.type == messages.T_GAME_WON_BY){
+            if( oMsg.type == Messages.T_GAME_WON_BY){
                 gameObj.setStatus(oMsg.data);
                 //game was won by somebody, update statistics
                 gameStatus.gamesCompleted++;
@@ -109,7 +113,13 @@ app.get("/", function (req, res) {
   res.sendFile("splash.html", {root: "./public"});
   });
 
+  app.get("/setup", function (req, res) {
+    res.sendFile("setup.html", {root: "./public"});
+    });
 
+    app.get("/game", function (req, res) {
+      res.sendFile("game.html", {root: "./public"});
+      });
 
   // var game = function (gameID) {
   //   this.playerA = null;

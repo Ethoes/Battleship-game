@@ -14,13 +14,13 @@
     exports.O_Set_Field = "FIELD" 
     exports.T_Set_Field = {
         type: exports.O_Set_Field,
-        data = null
+        data: null
     };
 
     exports.O_Set_Field_B = "FIELD" 
     exports.T_Set_Field_B = {
         type: exports.O_Set_Field_B,
-        data = null
+        data: null
     };
 
 }(typeof exports === "undefined" ? this.Messages = {} : exports));
