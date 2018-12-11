@@ -1,27 +1,13 @@
-<<<<<<< HEAD
 var smolship = [];
 var smolship2 = [];
 var mediumship = [];
 var mediumship2 = [];
 var largeship = [];
 
-var currentship;
-
-
-=======
-exampleSocket.onmessage = function (event) {
-    //console.log(event.data);
-    
-var smolship = [boardA[0], boardA[1]];
-var smolship2 = [boardA[2], board[3]];
-var mediumship = [boardA[4], boardA[5], boardA[6]];
-var mediumship2 = [boardA[7], boardA[8], boardA[9]];
-var largeship = [boardA[10], boardA[11], boardA[12], boardA[13]];
-}
 
 var currentship;
 
->>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
+
 var ships = [smolship, smolship2, mediumship, mediumship2, largeship];
 
 var $element = 0;
@@ -101,11 +87,8 @@ var main = function () {
             currentship.push(idgrid);
             clickedgrids.push(idgrid);
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
             if(toggle == 1){
                 turn--;
                
@@ -182,7 +165,6 @@ var main = function () {
                     shipimg.addClass("disable");
 
                     $(".Field div").toArray().forEach(function (elementgrid1) {
-<<<<<<< HEAD
                         console.log("here"); 
                                //showing the ships For smolship
         const ship11 = document.querySelector('.ship1-1');
@@ -385,9 +367,6 @@ var main = function () {
                 space54.appendChild(ship54); 
         }            
         $(elementgrid1).addClass("disabled");
-=======
-                        $(elementgrid1).addClass("disabled");
->>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
                     })
 
                 }
@@ -396,11 +375,7 @@ var main = function () {
                 prevgrid = idgrid;
             }
 
-<<<<<<< HEAD
            
-=======
-             
->>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
                 return false;
 
             
@@ -413,8 +388,4 @@ var main = function () {
   
 
 
-<<<<<<< HEAD
 $(document).ready(main);
-=======
-$(document).ready(main);
->>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002

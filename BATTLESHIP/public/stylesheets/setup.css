@@ -16,15 +16,9 @@ header img {
 
 section.Field{
     width: 700px;
-<<<<<<< HEAD
     /*background: blue;*/
     padding: 7px;
    /* border: 2px solid;*/
-=======
-    background: blue;
-    padding: 7px;
-    border: 2px solid;
->>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
     color: black;
     margin: auto;
     float: left;
@@ -44,11 +38,7 @@ div.row {
 div div {
     width: 92px;
     height: 92px;
-<<<<<<< HEAD
     /*background: rgb(27, 26, 102);*/
-=======
-    background: rgb(27, 26, 102);
->>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
     border: 2px solid;
     /* padding: 40px; */
     
@@ -63,13 +53,9 @@ div div:hover {
 }
 
 div div.clicked.disabled {
-<<<<<<< HEAD
     /*background: yellow;*/
     background: none;
     opacity: 1;
-=======
-    background: yellow;
->>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
     pointer-events: none;
 }
 
@@ -79,12 +65,8 @@ div div.available {
 
 div div.disabled {
     pointer-events: none;
-<<<<<<< HEAD
     background: darkblue;
     opacity: 0.5;
-=======
-    background: green;
->>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
 
 }
 
@@ -182,7 +164,6 @@ img.ship.disable {
     background: green;
     pointer-events: none;
 }
-<<<<<<< HEAD
 
 .opponentboard{
     position: relative;
@@ -207,5 +188,3 @@ img.ship.disable {
 .Up{
     transform: rotate(-90deg);
 }
-=======
->>>>>>> f8720dc79f2a9e9b0459ba9f872fe87377335002
