@@ -12,27 +12,6 @@ var mediumship = [cookies[5], cookies[6], cookies[7]];
 var mediumship2 = [cookies[8], cookies[9], cookies[10]];
 var largeship = [cookies[11], cookies[12], cookies[13], cookies[14]];
 
-var smolship;
-var smolship2;
-var mediumship;
-var mediumship2;
-var largeship;
-
-var socket = new WebSocket("ws://localhost:3000");
-
-socket.onmessage = function (event) {
-        console.log(event.data);
-
-for(var i=0; i < cookiesArray.length; i++) {
-    var cookie = cookiesArray[i].split("=");
-    cookies[cookie[0]]=cookie[1];
-}
-
-var smolship = [cookies[1], cookies[2]];
-var smolship2 = [cookies[3], cookies[4]];
-var mediumship = [cookies[5], cookies[6], cookies[7]];
-var mediumship2 = [cookies[8], cookies[9], cookies[10]];
-var largeship = [cookies[11], cookies[12], cookies[13], cookies[14]];
 
 var shots;
 
@@ -51,11 +30,42 @@ var loss = 0;
 
 var socket = new WebSocket("ws://localhost:3000");
 
-socket.onmessage = function (event) {
-        //console.log(event.data);
+socket.onopen = function () {
+        var shipString = [];
+        shipString[0] = smolship[0];
+        shipString[1] = smolship[1];
+        shipString[2] = smolship2[0];
+        shipString[3] = smolship2[1];
+        shipString[4] = mediumship[0];
+        shipString[5] = mediumship[1];
+        shipString[6] = mediumship[2];
+        shipString[7] = mediumship2[0];
+        shipString[8] = mediumship2[1];
+        shipString[9] = mediumship2[2];
+        shipString[10] = largeship[0];
+        shipString[11] = largeship[1];
+        shipString[12] = largeship[2];
+        shipString[13] = largeship[3];
 
-            if(event.type == Messages.T_Set_Field){
-                    var boardB = event.data;
+        var Outmail = Messages.O_Set_Field;
+        Outmail.data = shipString;
+        socket.send(JSON.stringify(Outmail));
+
+        
+}
+
+console.log(smolship3);
+
+socket.onmessage = function (event) {
+
+        let oMsg = JSON.parse(event.data);
+
+        console.log(oMsg);
+
+            if(oMsg.type == Messages.T_Set_Field){
+                    var boardB = oMsg;
+
+                    console.log("setting opponents field" + boardB);
                     
                     var smolship3 = [boardB[0], boardB[1]];
                     var smolship4 = [boardB[2], boardB[3]];
@@ -64,8 +74,8 @@ socket.onmessage = function (event) {
                     var largeship2 = [boardB[10], boardB[11], boardB[12], boardB[13]];
             }
         
-            if(event.type == Messages.T_Shot){
-                var Id = event.data;
+            if(oMsg.type == Messages.T_Shot){
+                var Id = oMsg.data;
                 const spaaaace = document.getElementById(Id);
                 if(ships[index].includes(id)){
                 spaaaace.className += ' bigDick';
@@ -81,17 +91,17 @@ socket.onmessage = function (event) {
                 }
                 }
             
-
+        }
             
-                var boardA = event.data;
+                // var boardA = event.data;
     
-                var smolship = [boardA[0], boardA[1]];
-                var smolship2 = [boardA[2], boardA[3]];
-                var mediumship = [boardA[4], boardA[5], boardA[6]];
-                var mediumship2 = [boardA[7], boardA[8], boardA[9]];
-                var largeship = [boardA[10], boardA[11], boardA[12], boardA[13]];
+                // var smolship = [boardA[0], boardA[1]];
+                // var smolship2 = [boardA[2], boardA[3]];
+                // var mediumship = [boardA[4], boardA[5], boardA[6]];
+                // var mediumship2 = [boardA[7], boardA[8], boardA[9]];
+                // var largeship = [boardA[10], boardA[11], boardA[12], boardA[13]];
     
-}
+
 
 
 

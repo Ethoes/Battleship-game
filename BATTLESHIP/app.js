@@ -33,14 +33,19 @@ wss.on("connection", function connection(ws) {
 
 
   let con = ws; 
-  con.id = connectionID;
+  con.id = connectionID++;
 
-  console.log("cookie " + con.cookie);
+  // console.log("cookie " + con.cookie);
   // res.cookie("signed_chocolate", "monster", { signed: true });
   // con.cookies("cookies for game", "sup bot", { signed: true});
   
   let playerType = currentGame.addPlayer(con);
+  console.log(currentGame.gameState);
+  console.log("playertype " + playerType);
+  
   currentGame.setState(playerType);
+  
+  
   websockets[con.id] = currentGame;
     
   console.log("Player %s placed in game %s as %s", con.id, currentGame.id, playerType);
@@ -48,12 +53,10 @@ wss.on("connection", function connection(ws) {
   // console.log(currentGame.playerA);
     
   if (currentGame.hasTwoConnectedPlayers()) {
-      currentGame = new Game(gameStatus.gamesInitialized++);
+      currentGame = new Game(gameStats.gamesInitialized++);
   }
   
   con.on("message", function incoming(message) {
-
-
   
     let oMsg = JSON.parse(message);
  
@@ -61,6 +64,7 @@ wss.on("connection", function connection(ws) {
     // console.log( "first log "+ oMsg.type + "   " +Messages.T_Set_Field);
     // console.log(oMsg.type === Messages.T_Set_Field);
 
+    console.log("getting message " + message);
 
     // con.send("supder");
 
@@ -68,17 +72,27 @@ wss.on("connection", function connection(ws) {
     // console.log(gameObj.playerA == con);
     
     if (isPlayerA) {
+
+      
             
             /*
              * player A cannot do a lot, just send the target word;
              * if player B is already available, send message to B
              */
       if (oMsg.type === Messages.T_Set_Field) {
-        console.log("this is the fucking problem");
+        // console.log("this is the fucking problem");
+
+        
         
         gameObj.setplayerAfield(oMsg.data);
         if(gameObj.hasTwoConnectedPlayers()){
+
+          console.log("sending field to b and a ");
+
           gameObj.playerB.send(message); 
+          var bericht = Messages.O_Set_Field;
+          bericht.data = gameObj.getplayerBField;
+          gameObj.playerA.send(JSON.stringify(bericht));
           
         } 
 
@@ -100,10 +114,20 @@ wss.on("connection", function connection(ws) {
       }
     }
       else {
-        if (oMsg.type == Messages.O_Set_Field) { 
+      
+        if (oMsg.type == Messages.T_Set_Field) { 
+         
           gameObj.setplayerBfield(oMsg.data);
           if(gameObj.hasTwoConnectedPlayers()){
+
+
+            console.log("sendig drom b ")
+            // console.log(gameObj.playerB);
             gameObj.playerA.send(message); 
+            var bericht = Messages.O_Set_Field;
+            bericht.data = gameObj.getplayerAField;
+            gameObj.playerB.send(JSON.stringify(bericht));
+
           }                
         }
             /*
@@ -146,7 +170,7 @@ app.get("/", function (req, res) {
       res.sendFile("game.html", {root: "./public"});
       // usrid = req.cookies.session;
       // console.log(usrid);
-      console.log(req.cookies);
+      // console.log(req.cookies);
       });
 
 

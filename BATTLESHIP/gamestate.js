@@ -4,8 +4,8 @@ var game = function (gameID) {
     this.id = gameID;
     this.playerAhits = {};
     this.playerBhits = {};
-    this.playerAField ={};
-    this.playerBField = {};
+    this.playerAField;
+    this.playerBField;
     this.gameState = "0 JOINT";
   }
 
@@ -14,7 +14,7 @@ var game = function (gameID) {
           this.gameState = "1 JOINT";
       }
 
-      if(state == "B")
+      else if(state == "B")
        this.gameState = "2 JOINT";
 
     else{
@@ -24,11 +24,11 @@ var game = function (gameID) {
   }
 
 
-  game.prototype.setplayerAfield = function(ships = {}) {
+  game.prototype.setplayerAfield = function(ships) {
     this.playerAField = ships;
   }
 
-  game.prototype.setplayerBfield = function(ships = {}) {
+  game.prototype.setplayerBfield = function(ships) {
     this.playerBField = ships;
   }
 
@@ -72,7 +72,7 @@ var game = function (gameID) {
     }
 
     else{
-        this.playerB == "1 JOINT";
+        this.playerB = p;
         return "B";
     }
 
