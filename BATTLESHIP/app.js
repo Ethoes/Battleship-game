@@ -53,7 +53,17 @@ wss.on("connection", function connection(ws) {
 
   // console.log(currentGame.playerA);
     
+  let gameObj = websockets[con.id];
+
   if (currentGame.hasTwoConnectedPlayers()) {
+    
+    var Outmail = Messages.O_Shot;
+    Outmail.data = 50;
+    
+    gameObj.playerB.send(JSON.stringify(Outmail));
+
+    console.log("sending shot to player 3");
+
       currentGame = new Game(gameStats.gamesInitialized++);
   }
   
@@ -61,7 +71,7 @@ wss.on("connection", function connection(ws) {
   
     let oMsg = JSON.parse(message);
  
-    let gameObj = websockets[con.id];
+    // let gameObj = websockets[con.id];
     // console.log( "first log "+ oMsg.type + "   " +Messages.T_Set_Field);
     // console.log(oMsg.type === Messages.T_Set_Field);
 
@@ -103,9 +113,8 @@ wss.on("connection", function connection(ws) {
         // gameObj.playerA.send(message);
       // }, 300);
                 
-        if(oMsg.type == Messages.T_MAKE_A_GUESS){
-          gameObj.playerA.send(message);
-          gameObj.setStatus("CHAR GUESSED");
+        if(oMsg.type == Messages.T_Shot){
+          gameObj.playerB.send(message);
         }
         
         if( oMsg.type == Messages.T_GAME_WON_BY){
@@ -137,9 +146,8 @@ wss.on("connection", function connection(ws) {
              * player B can make a guess; 
              * this guess is forwarded to A
              */ 
-            if(oMsg.type == Messages.T_MAKE_A_GUESS){
+            if(oMsg.type == Messages.T_Shot){
                 gameObj.playerA.send(message);
-                gameObj.setStatus("CHAR GUESSED");
             }
             /*
              * player B can state who won/lost

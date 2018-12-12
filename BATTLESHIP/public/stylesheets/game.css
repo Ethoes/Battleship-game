@@ -37,6 +37,7 @@ section.leftField{
     /*color: black;*/
     margin: auto;
     float: left;
+    pointer-events: none;
 
 }
 
