@@ -4,10 +4,23 @@ background: rgb(47, 50, 65);
 margin: auto;
 }
 
-/* img .logo {
-     max-height: 600px;
-     float: right;
-} */
+header div {
+    /* padding: 10px; */
+    padding-left: 50px;
+    padding-right: 50px;
+    background: blue;
+}
+
+header img {
+     /* max-height: 600px; */
+     /* float: left; */
+}
+
+header {
+    margin-bottom: 100px;
+   
+    /* background: yellow; */
+}
 
 header, main, footer {
     min-width: 855px;
