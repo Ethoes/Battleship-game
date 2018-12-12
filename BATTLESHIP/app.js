@@ -83,9 +83,6 @@ wss.on("connection", function connection(ws) {
     // console.log(gameObj.playerA == con);
     
     if (isPlayerA) {
-
-      
-            
             /*
              * player A cannot do a lot, just send the target word;
              * if player B is already available, send message to B
@@ -93,8 +90,6 @@ wss.on("connection", function connection(ws) {
       if (oMsg.type === Messages.T_Set_Field) {
         // console.log("this is the fucking problem");
 
-        
-        
         gameObj.setplayerAfield(oMsg.data);
         messageAField = message;
         // if(gameObj.hasTwoConnectedPlayers()){
@@ -112,6 +107,8 @@ wss.on("connection", function connection(ws) {
         // console.log(message.data);    
         // gameObj.playerA.send(message);
       // }, 300);
+
+      }
                 
         if(oMsg.type == Messages.T_Shot){
           gameObj.playerB.send(message);
@@ -122,7 +119,7 @@ wss.on("connection", function connection(ws) {
           //game was won by somebody, update statistics
           gameStatus.gamesCompleted++;
         }  
-      }
+      
     }
       else {
       
@@ -147,6 +144,7 @@ wss.on("connection", function connection(ws) {
              * this guess is forwarded to A
              */ 
             if(oMsg.type == Messages.T_Shot){
+              console.log("sending shot from B to A")
                 gameObj.playerA.send(message);
             }
             /*
