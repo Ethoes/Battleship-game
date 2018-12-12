@@ -18,6 +18,7 @@ for(const right of rights){
         right.className += ' disabled';
 }
 
+
 var shots = [];
 
 var smolship3;
@@ -32,6 +33,56 @@ var ships = [smolship, smolship2, mediumship, mediumship2, largeship];
 var loss = 0;
 
 
+for(var i=0; i < cookiesArray.length; i++) {
+    var cookie = cookiesArray[i].split("=");
+    cookies[cookie[0]]=cookie[1];
+}
+
+var smolship = [cookies[1], cookies[2]];
+var smolship2 = [cookies[3], cookies[4]];
+var mediumship = [cookies[5], cookies[6], cookies[7]];
+var mediumship2 = [cookies[8], cookies[9], cookies[10]];
+var largeship = [cookies[11], cookies[12], cookies[13], cookies[14]];
+
+
+var shots;
+
+var smolship3;
+var smolship4;
+var mediumship3;
+var mediumship4;
+var largeship2;
+
+var enemyShips = [smolship3, smolship4, mediumship3, mediumship4, largeship2];
+var ships = [smolship, smolship2, mediumship, mediumship2, largeship];
+
+var loss = 0;
+
+
+
+var socket = new WebSocket("ws://localhost:3000");
+
+socket.onopen = function () {
+        var shipString = [];
+        shipString[0] = smolship[0];
+        shipString[1] = smolship[1];
+        shipString[2] = smolship2[0];
+        shipString[3] = smolship2[1];
+        shipString[4] = mediumship[0];
+        shipString[5] = mediumship[1];
+        shipString[6] = mediumship[2];
+        shipString[7] = mediumship2[0];
+        shipString[8] = mediumship2[1];
+        shipString[9] = mediumship2[2];
+        shipString[10] = largeship[0];
+        shipString[11] = largeship[1];
+        shipString[12] = largeship[2];
+        shipString[13] = largeship[3];
+
+        var Outmail = Messages.O_Set_Field;
+        Outmail.data = shipString;
+        socket.send(JSON.stringify(Outmail));
+}
 
 var socket = new WebSocket("ws://localhost:3000");
 
@@ -122,7 +173,6 @@ var hits = 0;
 var F = 1;
 var i = 1;
 var E = 0;
-
 
                 //add the ship append code here
                 //showing the ships For smolship
@@ -423,6 +473,3 @@ $(".leftField div").toArray().forEach(function (element) {
 
 
 $(document).ready(main);
-
-
-
