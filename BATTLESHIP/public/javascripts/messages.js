@@ -7,19 +7,19 @@
 
     exports.T_Shot = "SHOT_PLACE";
     exports.O_Shot = {
-        type: exports.O_Shot,
+        type: exports.T_Shot,
         data: null
     };
 
     exports.T_Set_Field = "FIELD" 
     exports.O_Set_Field = {
-        type: exports.O_Set_Field,
+        type: exports.T_Set_Field,
         data: null
     };
 
     exports.T_Set_Field_B = "FIELDB" 
     exports.O_Set_Field_B = {
-        type: exports.O_Set_Field_B,
+        type: exports.T_Set_Field_B,
         data: null
     };
 

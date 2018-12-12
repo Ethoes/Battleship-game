@@ -1,22 +1,129 @@
-//var smolship = [1, 2];
-//var smolship2 = [3, 4];
-//var mediumship = [16, 23, 30];
-//var mediumship2 = [8, 9, 10];
-//var largeship = [46, 47, 48, 49];
+var cookiesArray = document.cookie.split('; ');
+var cookies=[];
+
+for(var i=0; i < cookiesArray.length; i++) {
+    var cookie = cookiesArray[i].split("=");
+    cookies[cookie[0]]=cookie[1];
+}
+
+var smolship = [cookies[1], cookies[2]];
+var smolship2 = [cookies[3], cookies[4]];
+var mediumship = [cookies[5], cookies[6], cookies[7]];
+var mediumship2 = [cookies[8], cookies[9], cookies[10]];
+var largeship = [cookies[11], cookies[12], cookies[13], cookies[14]];
+
+const rights = document.querySelectorAll('.r')
+
+for(const right of rights){
+        right.className += ' disabled';
+}
+
+var shots = [];
+
+var smolship3;
+var smolship4;
+var mediumship3;
+var mediumship4;
+var largeship2;
+
+var enemyShips = [smolship3, smolship4, mediumship3, mediumship4, largeship2];
+var ships = [smolship, smolship2, mediumship, mediumship2, largeship];
+
+var loss = 0;
 
 
-"ws://localhost:3000".onmessage = function (event) {
-        //console.log(event.data);
+
+var socket = new WebSocket("ws://localhost:3000");
+
+socket.onopen = function () {
+        var shipString = [];
+        shipString[0] = smolship[0];
+        shipString[1] = smolship[1];
+        shipString[2] = smolship2[0];
+        shipString[3] = smolship2[1];
+        shipString[4] = mediumship[0];
+        shipString[5] = mediumship[1];
+        shipString[6] = mediumship[2];
+        shipString[7] = mediumship2[0];
+        shipString[8] = mediumship2[1];
+        shipString[9] = mediumship2[2];
+        shipString[10] = largeship[0];
+        shipString[11] = largeship[1];
+        shipString[12] = largeship[2];
+        shipString[13] = largeship[3];
+
+        var Outmail = Messages.O_Set_Field;
+        Outmail.data = shipString;
+        socket.send(JSON.stringify(Outmail));
+
         
-            if(event.type == Messages.T_Set_Field){
-                var boardA = event.data;
+}
+
+console.log(smolship3);
+
+socket.onmessage = function (event) {
+        
+
+        console.log(event.data);
+
+        let oMsg = JSON.parse(event.data);
+
+        console.log(oMsg.data[0]);
+
+            if(oMsg.type == Messages.T_Set_Field){
+                    var boardB = oMsg.data;
+
+                    console.log("setting opponents field " + parseInt(boardB));
+                    
+                    smolship3 = [boardB[0], boardB[1]];
+                    smolship4 = [boardB[2], boardB[3]];
+                    mediumship3 = [boardB[4], boardB[5], boardB[6]];
+                    mediumship4 = [boardB[7], boardB[8], boardB[9]];
+                    largeship2 = [boardB[10], boardB[11], boardB[12], boardB[13]];
+            }
+        
+            if(oMsg.type == Messages.T_Shot){
+                var Id = oMsg.data;
+
+                if(id != 50){
+                        const spaaaace = document.getElementById(Id);
+                        if(ships[index].includes(Id)){
+                        spaaaace.className += ' bigDick';
+                        loss++;
+                        }
+                        if(!(ships[index].includes(Id))){
+                        spaaaace.className += ' smallDick'
+                        }
+                }
+                
+                for(const right of rights){
+                        if(!(shots.includes(Id))){
+                        right.className -= ' disabled'
+                        }
+                }
+                }
+            
+        }
+            
+                // var boardA = event.data;
     
-                var smolship = [boardA[0], boardA[1]];
-                var smolship2 = [boardA[2], board[3]];
-                var mediumship = [boardA[4], boardA[5], boardA[6]];
-                var mediumship2 = [boardA[7], boardA[8], boardA[9]];
-                var largeship = [boardA[10], boardA[11], boardA[12], boardA[13]];
+                // var smolship = [boardA[0], boardA[1]];
+                // var smolship2 = [boardA[2], boardA[3]];
+                // var mediumship = [boardA[4], boardA[5], boardA[6]];
+                // var mediumship2 = [boardA[7], boardA[8], boardA[9]];
+                // var largeship = [boardA[10], boardA[11], boardA[12], boardA[13]];
     
+
+
+
+
+var clicks = 0;
+var hits = 0;
+var F = 1;
+var i = 1;
+var E = 0;
+
+
                 //add the ship append code here
                 //showing the ships For smolship
                 const ship11 = document.querySelector('.ship1-1');
@@ -217,18 +324,9 @@
                         space52.appendChild(ship52);
                         space53.appendChild(ship53);
                         space54.appendChild(ship54); 
-                }
+                
 
         }
-}
-
-var ships = [smolship, smolship2, mediumship, mediumship2, largeship];
-
-var clicks = 0;
-var hits = 0;
-var F = 1;
-var i = 1;
-var E = 0;
 
 var main = function () {
     "use strict";
@@ -248,10 +346,8 @@ var main = function () {
             for(var index = 0; index < ships.length; index++){
                 if(ships[index].includes(id)){
                         console.log("that's a hit");
-                        //$element.addClass("hit");
-                        var F = 1;
-                        var i = 1;
-                        var E = 0;      hit.className += ' visible';
+                        //$element.addClass("hit");      
+                        hit.className += ' visible';
                         $element.append(hit);
                         i++
                         E = 1;
@@ -261,18 +357,19 @@ var main = function () {
         }
 
                 if(E == 0) {
+                        miss.className += ' visible';
                         $element.append(miss);
                         F++
                         //send the message here for a click2
                 }
                 
-
-                hits++;
+                shots[clicks] = id;
+                clicks++;
                         //hit trackers
                         if(hits == 14){
                                 alert("winner, winner chicken dinner!");
                         }
-                        if(clicks == 49){
+                        if(loss == 14){
                                 alert("you lost fam");
                         }
                         console.log(clicks);
@@ -282,9 +379,13 @@ var main = function () {
                                 Outmail.data = element.id;
                                 socket.send(JSON.stringify(Outmail));
 
-                E = 0;
-            console.log(id);
-                    $(".rightField div:nth-child(" + id + ")") 
+                                for(const right of rights){
+                                        right.className += ' disabled';
+                                }
+
+                        E = 0;
+                        console.log(id);
+                        $(".rightField div:nth-child(" + id + ")") 
                             this.disabled = true;
                     
               

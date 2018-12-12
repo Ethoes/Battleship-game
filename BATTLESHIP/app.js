@@ -5,27 +5,56 @@ var websocket = require("ws");
 var port = process.argv[2];
 var app = express();
 
+var cookies = require("cookie-parser"); //////////////////////
+app.use(cookies("my_secret_abc_123"));
+
 app.use(express.static(__dirname + "/public"));
 
 var server = http.createServer(app);
 const wss = new websocket.Server({ server })
 
+var Messages = require("./public/javascripts/messages.js");
+
+var gameStats = {
+  since : Date.now(),     /* since we keep it simple and in-memory, keep track of when this object was created */
+  shotsfired : 0,   /* number of games initialized */
+  playersonline : 0,       /* number of games aborted */
+  gamesInitialized: 0      /* number of games successfully completed */
+};
+
+var Game = require("./gamestate");
+
 var websockets = {};
 var currentGame = new Game(gameStats.gamesInitialized++);
 var connectionID = 0;
+var messageAField;
+
 
 wss.on("connection", function connection(ws) {
-  
+
+
   let con = ws; 
   con.id = connectionID++;
+
+  // console.log("cookie " + con.cookie);
+  // res.cookie("signed_chocolate", "monster", { signed: true });
+  // con.cookies("cookies for game", "sup bot", { signed: true});
   
   let playerType = currentGame.addPlayer(con);
+  console.log(currentGame.gameState);
+  console.log("playertype " + playerType);
+  
+  currentGame.setState(playerType);
+  
+  
   websockets[con.id] = currentGame;
     
   console.log("Player %s placed in game %s as %s", con.id, currentGame.id, playerType);
+
+  // console.log(currentGame.playerA);
     
   if (currentGame.hasTwoConnectedPlayers()) {
-      currentGame = new Game(gameStatus.gamesInitialized++);
+      currentGame = new Game(gameStats.gamesInitialized++);
   }
   
   con.on("message", function incoming(message) {
@@ -33,27 +62,53 @@ wss.on("connection", function connection(ws) {
     let oMsg = JSON.parse(message);
  
     let gameObj = websockets[con.id];
+    // console.log( "first log "+ oMsg.type + "   " +Messages.T_Set_Field);
+    // console.log(oMsg.type === Messages.T_Set_Field);
+
+    console.log("getting message " + message);
+
+    // con.send("supder");
+
     let isPlayerA = (gameObj.playerA == con) ? true : false;
+    // console.log(gameObj.playerA == con);
     
     if (isPlayerA) {
+
+      
             
             /*
              * player A cannot do a lot, just send the target word;
              * if player B is already available, send message to B
              */
-      if (oMsg.type == messages.O_Set_Field) {
+      if (oMsg.type === Messages.T_Set_Field) {
+        // console.log("this is the fucking problem");
+
+        
         
         gameObj.setplayerAfield(oMsg.data);
-        if(gameObj.hasTwoConnectedPlayers()){
-          gameObj.playerB.send(message); 
-        }     
+        messageAField = message;
+        // if(gameObj.hasTwoConnectedPlayers()){
+
+        //   console.log("sending field to b and a ");
+
+        //   gameObj.playerB.send(message); 
+        //   var bericht = Messages.O_Set_Field;
+        //   bericht.data = gameObj.getplayerBField;
+        //   gameObj.playerA.send(JSON.stringify(bericht));
+          
+        // } 
+
+        // setTimeout(function(){  
+        // console.log(message.data);    
+        // gameObj.playerA.send(message);
+      // }, 300);
                 
-        if(oMsg.type == messages.T_MAKE_A_GUESS){
+        if(oMsg.type == Messages.T_MAKE_A_GUESS){
           gameObj.playerA.send(message);
           gameObj.setStatus("CHAR GUESSED");
         }
         
-        if( oMsg.type == messages.T_GAME_WON_BY){
+        if( oMsg.type == Messages.T_GAME_WON_BY){
           gameObj.setStatus(oMsg.data);
           //game was won by somebody, update statistics
           gameStatus.gamesCompleted++;
@@ -61,24 +116,35 @@ wss.on("connection", function connection(ws) {
       }
     }
       else {
-        if (oMsg.type == messages.O_Set_Field) { 
+      
+        if (oMsg.type == Messages.T_Set_Field) { 
+         
           gameObj.setplayerBfield(oMsg.data);
           if(gameObj.hasTwoConnectedPlayers()){
+
+
+            console.log("sendig from b ")
+            // console.log(gameObj.playerB);
             gameObj.playerA.send(message); 
+            // var bericht = Messages.O_Set_Field;
+            // bericht.data = gameObj.getplayerAField;
+            // gameObj.playerB.send(JSON.stringify(bericht));
+
+            gameObj.playerB.send(messageAField);
           }                
         }
             /*
              * player B can make a guess; 
              * this guess is forwarded to A
              */ 
-            if(oMsg.type == messages.T_MAKE_A_GUESS){
+            if(oMsg.type == Messages.T_MAKE_A_GUESS){
                 gameObj.playerA.send(message);
                 gameObj.setStatus("CHAR GUESSED");
             }
             /*
              * player B can state who won/lost
              */ 
-            if( oMsg.type == messages.T_GAME_WON_BY){
+            if( oMsg.type == Messages.T_GAME_WON_BY){
                 gameObj.setStatus(oMsg.data);
                 //game was won by somebody, update statistics
                 gameStatus.gamesCompleted++;
@@ -89,11 +155,33 @@ wss.on("connection", function connection(ws) {
 })
 
 
+// app.use(cookies("my_secret_abc_123"));
+
+
 app.get("/", function (req, res) {
   res.sendFile("splash.html", {root: "./public"});
   });
 
+  app.get("/setup", function (req, res) {
+  //   res.cookie("chocolate", "kruemel");
+	//  res.cookie("session", connectionID++);
+    res.sendFile("setup.html", {root: "./public"});
+    // console.log(req.cookies);
+    });
 
+    app.get("/game", function (req, res) {
+      res.sendFile("game.html", {root: "./public"});
+      // usrid = req.cookies.session;
+      // console.log(usrid);
+      // console.log(req.cookies);
+      });
+
+
+      // app.post("/setup", function (req, res) {
+      //   console.log("data has been posted to the server!");
+      //   // send back a simple object
+      //   res.json({"message":"You posted to the server!"});
+      //   });
 
   // var game = function (gameID) {
   //   this.playerA = null;
@@ -106,12 +194,21 @@ app.get("/", function (req, res) {
   // }
 
 
-  var gameStats = {
-    since : Date.now(),     /* since we keep it simple and in-memory, keep track of when this object was created */
-    shotsfired : 0,   /* number of games initialized */
-    playersonline : 0,       /* number of games aborted */
-    gamesCompleted : 0      /* number of games successfully completed */
-};
+
+
+//   app.use(cookies("mysecret")); // this will encrypt cookies to avoid users tampering with them
+// app.use(function(req, res, next) {
+//     var userId = req.signedCookies.userId;
+//     if(userId === undefined) { // no cookie
+//         userId = ++usersCount;
+//         console.log("# Setting new cookie for user " + userId);
+//         res.cookie("userId", userId, {signed: true, httpOnly: true});
+//     }
+//     req.userId = parseInt(userId); // store the parsed userId for the next components
+//     next(); // call on the next component
+// });
+
+  
 
 
 

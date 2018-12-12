@@ -1,24 +1,34 @@
 var game = function (gameID) {
-    this.playerA = null;
-    this.playerB = null;
+    this.playerA;
+    this.playerB;
     this.id = gameID;
     this.playerAhits = {};
     this.playerBhits = {};
-    this.playerAField ={};
-    this.playerBField = {};
+    this.playerAField;
+    this.playerBField;
     this.gameState = "0 JOINT";
   }
 
   game.prototype.setState = function(state) {
-      this.gameState = state;
+      if(state == "A"){
+          this.gameState = "1 JOINT";
+      }
+
+      else if(state == "B")
+       this.gameState = "2 JOINT";
+
+    else{
+        this.gameState = "0 JOINT";
+    }
+      
   }
 
 
-  game.prototype.setplayerAfield = function(ships = {}) {
+  game.prototype.setplayerAfield = function(ships) {
     this.playerAField = ships;
   }
 
-  game.prototype.setplayerBfield = function(ships = {}) {
+  game.prototype.setplayerBfield = function(ships) {
     this.playerBField = ships;
   }
 
@@ -51,18 +61,18 @@ var game = function (gameID) {
 
   game.prototype.addPlayer = function (p) {
 
-    if(this.gameState != "0 JOINT" && this.gameState != "1 JOINT"){
-        return new Error("game full");
-    }
+    // if(this.gameState != "0 JOINT" && this.gameState != "1 JOINT"){
+    //     return new Error("game full");
+    // }
 
     
     if(this.gameState == "0 JOINT"){
-        this.playerA == p;
+        this.playerA = p;
         return "A";
     }
 
     else{
-        this.playerB == "1 JOINT";
+        this.playerB = p;
         return "B";
     }
 
