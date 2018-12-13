@@ -74,9 +74,7 @@ wss.on("connection", function connection(ws) {
   
     let oMsg = JSON.parse(message);
  
-    // let gameObj = websockets[con.id];
-    // console.log( "first log "+ oMsg.type + "   " +Messages.T_Set_Field);
-    // console.log(oMsg.type === Messages.T_Set_Field);
+  
 
     console.log("getting message " + message);
 
@@ -96,21 +94,7 @@ wss.on("connection", function connection(ws) {
 
         gameObj.setplayerAfield(oMsg.data);
         messageAField = message;
-        // if(gameObj.hasTwoConnectedPlayers()){
-
-        //   console.log("sending field to b and a ");
-
-        //   gameObj.playerB.send(message); 
-        //   var bericht = Messages.O_Set_Field;
-        //   bericht.data = gameObj.getplayerBField;
-        //   gameObj.playerA.send(JSON.stringify(bericht));
-          
-        // } 
-
-        // setTimeout(function(){  
-        // console.log(message.data);    
-        // gameObj.playerA.send(message);
-      // }, 300);
+       
 
       }
                 
@@ -132,11 +116,9 @@ wss.on("connection", function connection(ws) {
          
           gameObj.setplayerBfield(oMsg.data);
           if(gameObj.hasTwoConnectedPlayers()){
-            // console.log(gameObj.playerB);
+          
             gameObj.playerA.send(message); 
-            // var bericht = Messages.O_Set_Field;
-            // bericht.data = gameObj.getplayerAField;
-            // gameObj.playerB.send(JSON.stringify(bericht));
+            
 
             gameObj.playerB.send(messageAField);
           }                
@@ -166,7 +148,6 @@ wss.on("connection", function connection(ws) {
 })
 
 
-// app.use(cookies("my_secret_abc_123"));
 
 
 app.set('view engine', 'ejs')
@@ -175,101 +156,24 @@ app.get('/', (req, res) => {
     res.render('splash.ejs', { shotsfired: gameStats.shotsfired, players: gameStats.playersonline, games: (gameStats.gamesInitialized - 1) });
 })
 
-// app.get("/", function (req, res) {
-//   res.sendFile("splash.html", {root: "./public"});
-//   });
+
 
   app.get("/setup", function (req, res) {
-  //   res.cookie("chocolate", "kruemel");
-	//  res.cookie("session", connectionID++);
+  
     res.sendFile("setup.html", {root: "./public"});
-    // console.log(req.cookies);
+    
     });
 
     app.get("/game", function (req, res) {
       res.sendFile("game.html", {root: "./public"});
-      // usrid = req.cookies.session;
-      // console.log(usrid);
-      // console.log(req.cookies);
+      
       });
 
 
-      // app.post("/setup", function (req, res) {
-      //   console.log("data has been posted to the server!");
-      //   // send back a simple object
-      //   res.json({"message":"You posted to the server!"});
-      //   });
-
-  // var game = function (gameID) {
-  //   this.playerA = null;
-  //   this.playerB = null;
-  //   this.id = gameID;
-  //   this.playerAhits = 0;
-  //   this.playerBhits = 0;
-  //   this.playerAField ={};
-  //   this.playerBField = {};
-  // }
-
-
-
-
-//   app.use(cookies("mysecret")); // this will encrypt cookies to avoid users tampering with them
-// app.use(function(req, res, next) {
-//     var userId = req.signedCookies.userId;
-//     if(userId === undefined) { // no cookie
-//         userId = ++usersCount;
-//         console.log("# Setting new cookie for user " + userId);
-//         res.cookie("userId", userId, {signed: true, httpOnly: true});
-//     }
-//     req.userId = parseInt(userId); // store the parsed userId for the next components
-//     next(); // call on the next component
-// });
-
-  
+     
 
 
 
 server.listen(port);
 
-
-
-
-
-
-
-
-// var createError = require('http-errors');
-// var express = require('express');
-// var path = require('path');
-// var cookieParser = require('cookie-parser');
-// var logger = require('morgan');
-
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
-
-// var app = express();
-
-// // view engine setup
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
-
-// app.use(logger('dev'));
-// app.use(express.json());
-// app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
-
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
-
-// // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
-
-// // error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
 

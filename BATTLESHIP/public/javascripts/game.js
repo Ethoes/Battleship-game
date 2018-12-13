@@ -84,6 +84,11 @@ socket.onmessage = function (event) {
             }
         
             if(oMsg.type == Messages.T_Shot){
+                
+                $('.status').removeClass("opponentsturn");
+
+                $('.status').addClass("notwaiting");
+               
                 var Id = oMsg.data;
 
                 if(Id != 50){
@@ -105,18 +110,7 @@ socket.onmessage = function (event) {
                 }
             
         }
-            
-                // var boardA = event.data;
-    
-                // var smolship = [boardA[0], boardA[1]];
-                // var smolship2 = [boardA[2], boardA[3]];
-                // var mediumship = [boardA[4], boardA[5], boardA[6]];
-                // var mediumship2 = [boardA[7], boardA[8], boardA[9]];
-                // var largeship = [boardA[10], boardA[11], boardA[12], boardA[13]];
-    
-
-
-
+          
 
 var clicks = 0;
 var hits = 0;
@@ -348,10 +342,15 @@ var main = function () {
             const hit = document.querySelector('.hit'+i);
             const miss = document.querySelector('.miss' + F);
 
+            $('.status').removeClass("notwaiting");
+            $('.status').addClass("opponentsturn");
+
+     
+
             for(var index = 0; index < ships.length; index++){
                 if(ships[index].includes(id)){
                         console.log("that's a hit");
-                        //$element.addClass("hit");      
+                            
                         hit.className += ' visible';
                         $element.append(hit);
                         i++
@@ -405,11 +404,11 @@ $(".leftField div").toArray().forEach(function (element) {
         $(element).on("click", function () {
             
             var $element = $(element);
-            console.log($element);
+        //     console.log($element);
             $element.addClass("active");
             var id = element.id;
 
-            console.log(id);
+        //     console.log(id);
             
                     $(".rightField div:nth-child(" + id + ")") 
                             this.disabled = true;

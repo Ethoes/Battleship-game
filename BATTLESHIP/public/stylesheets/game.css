@@ -1,22 +1,48 @@
 body {
-    width: 2000px;
+    width: 1880px;
 background: rgb(47, 50, 65);
 margin: auto;
+height: 1080px;
+overflow: none;
 }
 
 header h1 {
     padding: 10px;
-    /* padding-left: 50px;
-    padding-right: 50px; */
+    
     background: blue;
+    width: 470px;
+    height: 180px;
+    border: 3px;
+    border-color: black;
+    border-style: solid;
+    float: left;
+    margin-left: 50px;
+}
+
+
+
+header h1.status.notwaiting::before{
+    content: "Your Turn";
+}
+
+header h1.status.opponentsturn::after{
+    content: " Opponents turn"
+}
+
+header img {
+    float: right;
+    margin-right: 100px;
+}
+
+header {
+    min-height: 200px;
 }
 
 
 
 header {
     margin-bottom: 100px;
-   
-    /* background: yellow; */
+ 
 }
 
 header, main, footer {
@@ -30,11 +56,8 @@ main {
 }
 section.leftField{
     width: 700px;
-    /*background: blue;*/
     background: none;
     padding: 7px;
-    /*border: 1px solid;*/
-    /*color: black;*/
     margin: auto;
     float: left;
     pointer-events: none;
@@ -43,7 +66,6 @@ section.leftField{
 
 section.rightField{
     width: 700px;
-    /*background: green;*/
     padding: 7px;
     border: 1px;
     color: white;
@@ -55,14 +77,9 @@ section.rightField{
 div div{
     width: 92px;
     height: 92px;
-    /*background: rgb(27, 26, 102);*/
-    /*border: 1px solid;*/
-    /* padding: 40px; */
-    
-    /* border-bottom: 10px; */
-    /*border-color: black;*/
+ 
     float: left;
-    /* margin: auto; */
+  
 }
 
 div div:hover {
@@ -71,7 +88,6 @@ div div:hover {
 }
 
 div div.clicked {
-    /*background: yellow;*/
     pointer-events: none;
 }
 
@@ -83,19 +99,13 @@ div div.fill1 {
     background: none;
     border: none;
     background-image: url("twoShip.png");
-    
-    /* position: relative; */
     height: 200;
     width: 200;
-    /* top: 5px;
-    left: 5px; */
     cursor: pointer;
     -webkit-user-drag: auto;
 }
 
-/* [draggable=true] {
-    cursor: move;
-} */
+
 
 .Left{
     transform: rotate(180deg);
@@ -182,7 +192,6 @@ div div.fill1 {
 
 div div.disabled {
     pointer-events: none;
-    /*background: darkblue;
-    opacity: 0.5;*/
+  
 
 }
