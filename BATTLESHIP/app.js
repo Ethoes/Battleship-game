@@ -16,7 +16,7 @@ const wss = new websocket.Server({ server })
 var Messages = require("./public/javascripts/messages.js");
 
 var gameStats = {
-  since : Date.now(),     /* since we keep it simple and in-memory, keep track of when this object was created */
+  // since : Date.now(),     /* since we keep it simple and in-memory, keep track of when this object was created */
   shotsfired : 0,   /* number of games initialized */
   playersonline : 0,       /* number of games aborted */
   gamesInitialized: 0      /* number of games successfully completed */
@@ -28,6 +28,8 @@ var websockets = {};
 var currentGame = new Game(gameStats.gamesInitialized++);
 var connectionID = 0;
 var messageAField;
+
+
 
 
 wss.on("connection", function connection(ws) {
@@ -61,6 +63,7 @@ wss.on("connection", function connection(ws) {
     Outmail.data = 50;
     
     gameObj.playerB.send(JSON.stringify(Outmail));
+  
 
     console.log("sending shot to player 3");
 
@@ -79,6 +82,7 @@ wss.on("connection", function connection(ws) {
 
     // con.send("supder");
 
+    gameStats.playersonline++;
     let isPlayerA = (gameObj.playerA == con) ? true : false;
     // console.log(gameObj.playerA == con);
     
@@ -111,6 +115,7 @@ wss.on("connection", function connection(ws) {
       }
                 
         if(oMsg.type == Messages.T_Shot){
+          gameStats.shotsfired++;
           gameObj.playerB.send(message);
         }
         
@@ -127,9 +132,6 @@ wss.on("connection", function connection(ws) {
          
           gameObj.setplayerBfield(oMsg.data);
           if(gameObj.hasTwoConnectedPlayers()){
-
-
-            console.log("sendig from b ")
             // console.log(gameObj.playerB);
             gameObj.playerA.send(message); 
             // var bericht = Messages.O_Set_Field;
@@ -144,7 +146,8 @@ wss.on("connection", function connection(ws) {
              * this guess is forwarded to A
              */ 
             if(oMsg.type == Messages.T_Shot){
-              console.log("sending shot from B to A")
+              gameStats.shotsfired++;
+              // console.log("sending shot from B to A")
                 gameObj.playerA.send(message);
             }
             /*
@@ -153,7 +156,9 @@ wss.on("connection", function connection(ws) {
             if( oMsg.type == Messages.T_GAME_WON_BY){
                 gameObj.setStatus(oMsg.data);
                 //game was won by somebody, update statistics
-                gameStatus.gamesCompleted++;
+               
+                gameStats.playersonline--;
+                
             }            
         }
     });
@@ -164,9 +169,15 @@ wss.on("connection", function connection(ws) {
 // app.use(cookies("my_secret_abc_123"));
 
 
-app.get("/", function (req, res) {
-  res.sendFile("splash.html", {root: "./public"});
-  });
+app.set('view engine', 'ejs')
+app.get('/', (req, res) => {
+    //example of data to render; here gameStatus is an object holding this information
+    res.render('splash.ejs', { shotsfired: gameStats.shotsfired, players: gameStats.playersonline, games: (gameStats.gamesInitialized - 1) });
+})
+
+// app.get("/", function (req, res) {
+//   res.sendFile("splash.html", {root: "./public"});
+//   });
 
   app.get("/setup", function (req, res) {
   //   res.cookie("chocolate", "kruemel");

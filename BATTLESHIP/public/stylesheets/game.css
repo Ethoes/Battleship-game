@@ -4,10 +4,10 @@ background: rgb(47, 50, 65);
 margin: auto;
 }
 
-header div {
-    /* padding: 10px; */
-    padding-left: 50px;
-    padding-right: 50px;
+header h1 {
+    padding: 10px;
+    /* padding-left: 50px;
+    padding-right: 50px; */
     background: blue;
 }
 
